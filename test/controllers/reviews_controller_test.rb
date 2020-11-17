@@ -1,7 +1,23 @@
 require "test_helper"
 
 describe ReviewsController do
-  # it "does a thing" do
-  #   value(1+1).must_equal 2
-  # end
+  describe "Index" do
+
+  end
+
+  describe "Show" do
+
+  end
+
+  describe "New" do
+
+  end
+
+  describe "Create" do
+
+  end
+
+  describe "Destroy" do
+
+  end
 end
