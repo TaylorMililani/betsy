@@ -1,7 +1,7 @@
 <ul>
-  <li><strong>Guest Name: </strong><%= @order[:name] %></li>
+  <li><strong>Buyer Name: </strong><%= @order[:name] %></li>
   <li><strong>Email: </strong><%= @order[:email] %></li>
   <li><strong>Address: </strong><%= @order[:address] %></li>
-  <li><strong>Card Number: </strong>************ <%= @order[:cc_num][11..14] %></li>
+  <li><strong>Card Number: </strong>************ <%= @order.cc_num[-4..-1] %></li>
   <li><strong>Card Exp. Date: </strong><%= @order[:cc_expiration] %></li>
 </ul>

@@ -26,9 +26,9 @@ ActiveRecord::Schema.define(version: 2020_11_17_214707) do
     t.string "name"
     t.string "email"
     t.string "address"
-    t.integer "cc_num"
+    t.string "cc_num"
     t.string "cc_expiration"
-    t.integer "ccv"
+    t.integer "cvv"
     t.integer "billing_zip"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

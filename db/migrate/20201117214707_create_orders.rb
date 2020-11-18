@@ -4,9 +4,9 @@ class CreateOrders < ActiveRecord::Migration[6.0]
       t.string :name
       t.string :email
       t.string :address
-      t.integer :cc_num
+      t.string :cc_num
       t.string :cc_expiration
-      t.integer :ccv
+      t.integer :cvv
       t.integer :billing_zip
 
       t.timestamps
