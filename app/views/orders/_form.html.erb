@@ -1,0 +1,52 @@
+<% if @order.errors.any? %>
+  <section class="alert__container">
+    <div class="alert alert-error">
+      <ul>
+        <% @order.errors.each do |column, message| %>
+          <li>
+            <%= column.capitalize %>: <%= message %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </section>
+<% end %>
+
+<main>
+
+  <%= form_with model: @order do |f| %>
+
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: "form-control"  %></div>
+
+    <div class="form-group">
+      <%= f.label :email %>
+      <%= f.text_field :email, class: "form-control"  %></div>
+
+    <div class="form-group">
+      <%= f.label :address %>
+      <%= f.text_field :address, class: "form-control"  %></div>
+
+    <div class="form-group">
+      <%= f.label :cc_num, 'Credit Card Number' %>
+      <%= f.text_field :cc_num, class: "form-control"  %></div>
+
+    <div class="form-group">
+      <%= f.label :cc_expiration, 'Expiration Date' %><br />
+      <%= f.text_field :cc_expiration, class: "form-control"  %></div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :cvv, 'CVV' %>
+      <%= f.text_field :cvv, class: "form-control"  %></div>
+
+    <div class="form-group">
+      <%= f.label :billing_zip, 'Billing Zip Code' %>
+      <%= f.text_field :billing_zip, class: "form-control"  %></div>
+
+    <div class="form-group">
+      <%= f.submit action_name, class: "btn btn-primary" %></div>
+  <% end %>
+
+</main>
