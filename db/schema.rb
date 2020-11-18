@@ -36,6 +36,17 @@ ActiveRecord::Schema.define(version: 2020_11_17_214707) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "products", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.string "category"
+    t.float "price"
+    t.integer "in_stock"
+    t.string "photo"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "reviews", force: :cascade do |t|
     t.integer "rating"
     t.string "text_field"
