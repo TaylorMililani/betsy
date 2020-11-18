@@ -61,9 +61,9 @@ class OrdersController < ApplicationController
 
   private
 
-  # def order_params
-  #   return params.require(:order).permit(:email, :address, :name, :cc_num, :cc_expiration, :cvv, :zip_code)
-  # end
+  def order_params
+    return params.require(:order).permit(:name, :email, :address, :cc_num, :cc_expiration, :ccv, :billing_zip)
+  end
 
   def find_order
     @order = Order.find_by(id: params[:id])

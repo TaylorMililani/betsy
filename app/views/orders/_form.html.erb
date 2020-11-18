@@ -14,7 +14,6 @@
 
 <main>
 
-
   <%= form_with model: @order do |f| %>
 
     <div class="form-group">
@@ -35,7 +34,8 @@
 
     <div class="form-group">
       <%= f.label :cc_expiration, 'Expiration Date' %><br />
-      <%= f.date_select :cc_expiration, :discard_day => true, :start_year => Date.today.year, :end_year => (Date.today.year+10), :use_month_numbers => true, class: "form-control" %>
+      <%= select_month(Date.new(Date.today.year, 1).beginning_of_month, {use_two_digit_numbers: true}, {id: 'cc-exp-month'}) %>
+      <%= select_year(Date.today, {start_year: Date.today.year, end_year: Date.today.year+10}, {id: 'cc-exp-year'}) %>
       </div>
 
     <div class="form-group">
