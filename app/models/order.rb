@@ -1,7 +1,7 @@
 class Order < ApplicationRecord
   validates :name, presence: true
   validates :email,
-            format: { with: /^(.+)@(.+)$/, message: "Email invalid"  },
+            format: { with: URI::MailTo::EMAIL_REGEXP, message: "Email invalid"  },
             length: { minimum: 4, maximum: 254 }
   validates :address, presence: true
   validates :cc_num, presence: true, numericality: true

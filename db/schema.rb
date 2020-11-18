@@ -23,14 +23,12 @@ ActiveRecord::Schema.define(version: 2020_11_17_214707) do
   end
 
   create_table "orders", force: :cascade do |t|
+    t.string "name"
     t.string "email"
     t.string "address"
-    t.string "city"
-    t.string "state"
-    t.integer "zip"
     t.integer "cc_num"
-    t.integer "ccv"
     t.string "cc_expiration"
+    t.integer "ccv"
     t.integer "billing_zip"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

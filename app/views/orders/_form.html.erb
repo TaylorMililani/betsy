@@ -18,25 +18,33 @@
   <%= form_with model: @order do |f| %>
 
     <div class="form-group">
-      <%= f.label :category %>
-      <%= f.select :category, ['album', 'book', 'movie'], {}, class: "form-control"  %>
-    </div>
+      <%= f.label :name %>
+      <%= f.text_field :name, class: "form-control"  %></div>
 
     <div class="form-group">
-      <%= f.label :title %>
-      <%= f.text_field :title, class: "form-control"  %></div>
+      <%= f.label :email %>
+      <%= f.text_field :email, class: "form-control"  %></div>
 
     <div class="form-group">
-      <%= f.label :creator %>
-      <%= f.text_field :creator, class: "form-control"  %></div>
+      <%= f.label :address %>
+      <%= f.text_field :address, class: "form-control"  %></div>
 
     <div class="form-group">
-      <%= f.label :publication_year %>
-      <%= f.text_field :publication_year, class: "form-control"  %></div>
+      <%= f.label :cc_num, 'Credit Card Number' %>
+      <%= f.text_field :cc_num, class: "form-control"  %></div>
 
     <div class="form-group">
-      <%= f.label :description %>
-      <%= f.text_area :description, class: "form-control"  %></div>
+      <%= f.label :cc_expiration, 'Expiration Date' %><br />
+      <%= f.date_select :cc_expiration, :discard_day => true, :start_year => Date.today.year, :end_year => (Date.today.year+10), :use_month_numbers => true, class: "form-control" %>
+      </div>
+
+    <div class="form-group">
+      <%= f.label :ccv, 'CVV' %>
+      <%= f.text_field :ccv, class: "form-control"  %></div>
+
+    <div class="form-group">
+      <%= f.label :billing_zip, 'Billing Zip Code' %>
+      <%= f.text_field :billing_zip, class: "form-control"  %></div>
 
     <div class="form-group">
       <%= f.submit action_name, class: "btn btn-primary" %></div>
