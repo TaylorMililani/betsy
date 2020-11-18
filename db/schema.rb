@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 2020_11_17_214707) do
     t.string "cc_expiration"
     t.integer "cvv"
     t.integer "billing_zip"
+    t.string "status", default: "pending"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

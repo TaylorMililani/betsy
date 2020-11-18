@@ -12,7 +12,6 @@ class Order < ApplicationRecord
 end
 
 
-private
 
 def valid_card_number?
   cc_number = self.cc_num
@@ -26,7 +25,7 @@ def valid_card_number?
     end
   end
   unless num.sum % 10 == 0
-    errors.add(:cc_number, 'Invalid Credit Card Number ')
+    errors.add(:cc_num, 'Invalid Credit Card Number ')
   end
 end
 

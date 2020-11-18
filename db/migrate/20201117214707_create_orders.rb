@@ -8,6 +8,7 @@ class CreateOrders < ActiveRecord::Migration[6.0]
       t.string :cc_expiration
       t.integer :cvv
       t.integer :billing_zip
+      t.string :status, default: "pending"
 
       t.timestamps
     end
