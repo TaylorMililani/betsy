@@ -1,0 +1,13 @@
+<section>
+    <% unless @category.products.empty? %>
+    <%= @category.name%>
+    <ul>
+      <% @category.products.each do |product| %>
+        <li><%= link_to product.name, product_path(product) %></li>
+      <% end %>
+    </ul>
+    <% else %>
+    <p>Sorry, there are currently no products in this category.</p>
+  <% end %>
+
+</section>

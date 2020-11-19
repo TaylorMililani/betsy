@@ -10,24 +10,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_19_003217) do
+ActiveRecord::Schema.define(version: 2020_11_19_023845) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "merchants", force: :cascade do |t|
-    t.string "username"
-    t.string "email"
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "categories_products", force: :cascade do |t|
+    t.bigint "category_id"
+    t.bigint "product_id"
+    t.index ["category_id"], name: "index_categories_products_on_category_id"
+    t.index ["product_id"], name: "index_categories_products_on_product_id"
+  end
+
+  create_table "order_items", force: :cascade do |t|
+    t.integer "quantity"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "orders", force: :cascade do |t|
+    t.string "name"
     t.string "email"
     t.string "address"
-    t.string "city"
-    t.string "state"
-    t.integer "zip"
+    t.string "cc_num"
+    t.string "cc_expiration"
+    t.integer "cvv"
+    t.integer "billing_zip"
+    t.string "status", default: "pending"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -35,7 +50,6 @@ ActiveRecord::Schema.define(version: 2020_11_19_003217) do
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.string "description"
-    t.string "category"
     t.float "price"
     t.integer "in_stock"
     t.string "photo"
