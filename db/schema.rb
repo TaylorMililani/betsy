@@ -15,19 +15,15 @@ ActiveRecord::Schema.define(version: 2020_11_18_202808) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "merchants", force: :cascade do |t|
-    t.string "username"
-    t.string "email"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "orders", force: :cascade do |t|
+    t.string "name"
     t.string "email"
     t.string "address"
-    t.string "city"
-    t.string "state"
-    t.integer "zip"
+    t.string "cc_num"
+    t.string "cc_expiration"
+    t.integer "cvv"
+    t.integer "billing_zip"
+    t.string "status", default: "pending"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
