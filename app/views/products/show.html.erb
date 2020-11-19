@@ -1,0 +1,19 @@
+<section>
+  <h2><%= @product.name %></h2>
+  <img src="/soul_dummy.jpeg" alt="person with a soul">
+  <p><%= @product.description %></p>
+  <p>Category: <%= @product.category %></p>
+  <p>Price: <%= @product.price %></p>
+  <p>In stock: <%= @product.in_stock %></p>
+
+
+
+  <section>
+    <!--    to_root for now, add a link to a review page-->
+    <%= link_to "Review", root_path, class: "btn btn-primary" %>
+    <!--    to_root for now, add a link to a cart-->
+    <%= link_to "Add to cart", root_path, class: "btn btn-primary" %>
+    <%= link_to "Edit", edit_product_path(@product.id), class: "btn btn-primary" %>
+    <%= link_to "Delete", products_path(@product.id), class: "btn btn-danger", method: "delete", data: { confirm: "Are you sure?" } %>
+  </section>
+</section>

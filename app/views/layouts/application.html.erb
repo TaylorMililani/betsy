@@ -9,7 +9,23 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
+
   <body>
+  <header>
+    <h1>
+      <%= link_to "SoulStore", root_path %>
+    </h1>
+
+    <nav>
+      <ul>
+        <li><%= link_to "Products", products_path %></li>
+        <li><%= link_to "Merchants", root_path %></li>
+        <li><%= link_to "Categories", root_path %></li>
+        <li><%= link_to "Orders", root_path %></li>
+      </ul>
+    </nav>
+  </header>
+
     <%= yield %>
   </body>
 </html>
