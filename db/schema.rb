@@ -10,24 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_18_202808) do
+ActiveRecord::Schema.define(version: 2020_11_19_210807) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "merchants", force: :cascade do |t|
-    t.string "username"
-    t.string "email"
+  create_table "order_items", force: :cascade do |t|
+    t.integer "quantity"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "name"
+    t.float "price"
+    t.bigint "product_id"
+    t.bigint "order_id"
+    t.index ["order_id"], name: "index_order_items_on_order_id"
+    t.index ["product_id"], name: "index_order_items_on_product_id"
   end
 
   create_table "orders", force: :cascade do |t|
+    t.string "name"
     t.string "email"
     t.string "address"
-    t.string "city"
-    t.string "state"
-    t.integer "zip"
+    t.string "cc_num"
+    t.string "cc_expiration"
+    t.integer "cvv"
+    t.integer "billing_zip"
+    t.string "status", default: "pending"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -48,6 +56,7 @@ ActiveRecord::Schema.define(version: 2020_11_18_202808) do
     t.string "text_field"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "title"
   end
 
   create_table "users", force: :cascade do |t|
@@ -57,4 +66,6 @@ ActiveRecord::Schema.define(version: 2020_11_18_202808) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "order_items", "orders"
+  add_foreign_key "order_items", "products"
 end
