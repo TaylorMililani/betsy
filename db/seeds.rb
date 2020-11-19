@@ -23,7 +23,7 @@ CSV.foreach(PRODUCTS_FILE, :headers => true) do |row|
   product = Product.new
   product.name = row['name']
   product.description = row['description']
-  product.category = row['category']
+  # product.category = row['category']
   product.price = row['price']
   product.in_stock = row['in_stock']
 
