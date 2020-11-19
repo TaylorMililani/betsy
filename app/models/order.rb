@@ -12,7 +12,6 @@ class Order < ApplicationRecord
 end
 
 
-
 def valid_card_number?
   cc_number = self.cc_num
   cc_number.gsub!(/\s+/, "")
