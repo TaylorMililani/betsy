@@ -1,4 +1,20 @@
 class UsersController < ApplicationController
+
+    def index
+        @users = User.all 
+    end
+
+    def show
+        @user = User.find_by(id: params[:id])
+
+        if @product.nil?
+            head :not_found
+            return
+        end
+    end
+
+    
+
     def create
         auth_hash = request.env["omniauth.auth"]
         user = User.find_by(uid: auth_hash[:uid], provider: "github")
@@ -24,5 +40,10 @@ class UsersController < ApplicationController
         flash[:success] = "Successfully logged out"
 
         redirect_to root_path
+    end
+
+    private
+    def product_params
+        params.require(:user).permit(:email, :uid, :provider, :username)
     end
 end
