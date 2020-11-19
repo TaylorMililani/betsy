@@ -1,5 +1,5 @@
 <section>
-    <% unless @category.products.nil? %>
+    <% unless @category.products.empty? %>
       <% @category.products.each do |product| %>
         <%= link_to product.name, product_path(product) %>
       <% end %>

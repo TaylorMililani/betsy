@@ -28,6 +28,12 @@ ActiveRecord::Schema.define(version: 2020_11_19_023845) do
     t.index ["product_id"], name: "index_categories_products_on_product_id"
   end
 
+  create_table "order_items", force: :cascade do |t|
+    t.integer "quantity"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "orders", force: :cascade do |t|
     t.string "name"
     t.string "email"
