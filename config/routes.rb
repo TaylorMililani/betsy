@@ -4,5 +4,5 @@ Rails.application.routes.draw do
   resources :orders
 
 
-  resources :categories, only: [:new]
+  resources :categories, only: [:new, :index, :show]
 end
