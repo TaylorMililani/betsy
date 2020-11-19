@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   resources :orders
   
   get "auth/github", as: "github_login"
+  get "auth/github/callback", to: "users#create"
 end
