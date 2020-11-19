@@ -1,4 +1,18 @@
- <h3>Add New Category</h3>
+<% if @category.errors.any? %>
+  <section class="alert__container">
+    <div class="alert alert-error">
+      <ul>
+        <% @category.errors.each do |column, message| %>
+          <li>
+            <%= column.capitalize %>: <%= message %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </section>
+<% end %>
+
+<h3>Add New Category</h3>
 
 <%= form_with model: @category do |f| %>
   <div class="form-group">

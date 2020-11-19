@@ -1,7 +1,7 @@
 class CategoriesController < ApplicationController
 
   def index
-    @category = Category.all
+    @categories = Category.all
   end
 
   def show
@@ -11,11 +11,9 @@ class CategoriesController < ApplicationController
       head :not_found
       return
     end
-    @products = @category.products
   end
 
   def new
-    @categories = Category.all
     @category = Category.new
   end
 
@@ -25,7 +23,7 @@ class CategoriesController < ApplicationController
     @categories = Category.all
     if @category.save
       flash[:success] = "#{@category.name} has been added!"
-      redirect_to current_user_path
+      redirect_to categories_path
       return
     else
       flash.now[:error] = "Something went wrong. #{@category.errors.messages[:name]}"

@@ -1,0 +1,10 @@
+<section>
+    <% unless @category.products.nil? %>
+      <% @category.products.each do |product| %>
+        <%= link_to product.name, product_path(product) %>
+      <% end %>
+    <% else %>
+    <p>Sorry, there are currently no products in this category.</p>
+  <% end %>
+
+</section>
