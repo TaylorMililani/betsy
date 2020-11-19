@@ -1,4 +1,8 @@
 class OrdersController < ApplicationController
+
+  before_action :find_order, only: [:show, :edit, :update, :destroy]
+
+
   def index
     @orders = Order.all
   end
@@ -47,23 +51,23 @@ class OrdersController < ApplicationController
     end
   end
 
-  # def destroy
-  #   if @order.nil?
-  #     head :not_found
-  #     return
-  #   end
-  #
-  #   @order.destroy
-  #   flash[:success] = "Successfully destroyed #{@order.id}"
-  #   redirect_to orders_path
-  #   return
-  # end
+  def destroy
+    if @order.nil?
+      head :not_found
+      return
+    end
+
+    @order.destroy
+    flash[:success] = "Successfully destroyed #{@order.id}"
+    redirect_to orders_path
+    return
+  end
 
   private
 
-  # def order_params
-  #   return params.require(:order).permit(:email, :address, :name, :cc_num, :cc_expiration, :cvv, :zip_code)
-  # end
+  def order_params
+    return params.require(:order).permit(:name, :email, :address, :cc_num, :cc_expiration, :cvv, :billing_zip)
+  end
 
   def find_order
     @order = Order.find_by(id: params[:id])
