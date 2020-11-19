@@ -28,10 +28,6 @@ ActiveRecord::Schema.define(version: 2020_11_17_214707) do
     t.string "city"
     t.string "state"
     t.integer "zip"
-    t.integer "cc_num"
-    t.integer "ccv"
-    t.string "cc_expiration"
-    t.integer "billing_zip"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
