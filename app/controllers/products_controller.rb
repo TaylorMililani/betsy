@@ -18,11 +18,13 @@ class ProductsController < ApplicationController
 
   def new
     @product = Product.new
+    @categories = Category.all
   end
 
   def create
     #create a new product
     @product = Product.new(product_params)
+    @categories = Category.all
 
     if @product.save
       flash[:success] = "#{@product.name} was successfully created!"
@@ -37,6 +39,7 @@ class ProductsController < ApplicationController
 
   def edit
     @product = Product.find_by(id: params[:id])
+    @categories = Category.all
 
     if @product.nil?
       head :not_found
@@ -46,6 +49,7 @@ class ProductsController < ApplicationController
 
   def update
     @product = Product.find_by(id: params[:id])
+    @categories = Category.all
 
     if @product.nil?
       head :not_found
