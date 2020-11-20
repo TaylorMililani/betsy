@@ -5,5 +5,3 @@ class Review < ApplicationRecord
 end
 
 # resources :review, except [:edit, :update]
-
-# validates :merchant_id { scope: product_id if product belongs_to :merchant } ??? merchants cant review their own products

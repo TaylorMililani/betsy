@@ -32,6 +32,12 @@ ActiveRecord::Schema.define(version: 2020_11_20_035711) do
     t.integer "quantity"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "name"
+    t.float "price"
+    t.bigint "product_id"
+    t.bigint "order_id"
+    t.index ["order_id"], name: "index_order_items_on_order_id"
+    t.index ["product_id"], name: "index_order_items_on_product_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -64,6 +70,7 @@ ActiveRecord::Schema.define(version: 2020_11_20_035711) do
     t.string "text_field"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "title"
   end
 
   create_table "users", force: :cascade do |t|
@@ -76,4 +83,6 @@ ActiveRecord::Schema.define(version: 2020_11_20_035711) do
   end
 
   add_foreign_key "products", "users"
+  add_foreign_key "order_items", "orders"
+  add_foreign_key "order_items", "products"
 end
