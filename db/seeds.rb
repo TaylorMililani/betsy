@@ -12,7 +12,8 @@ products = Product.create([{name: "Marie Curie", description: "Not great at chem
 
 users = User.create([{username: "STEMantics", email: "I_love_science@hotmath.com"}, {username: "eclectic_activism", email: "human_rights_r_cool@intersectionality.com"}])
 
-Product.create([{name: "Frida Kalo", description: "Artistic and creative artist", price: 500, in_stock: 10}, {name: "Salvador Dali", description: "Surrealistic painter", price: 1000, in_stock: 3}, {name: "Andy Warhol", description: "The Prince of Pop", price: 200, in_stock: 9}, {name: "Flash", description: "Superfast person", price: 120, in_stock: 20}, {name: "Superman", description: "Various superhuman abilities, such as incredible strength and impervious skin.", price: 500, in_stock: 3}, {name: "Wonder woman", description: "powerful, strong-willed character who does not back down from a fight or a challenge.", price: 3000, in_stock: 10}])
+
+Product.create([{name: "Frida Kahlo", description: "Artistic and creative artist", price: 500, in_stock: 10}, {name: "Salvador Dali", description: "Surrealistic painter", price: 1000, in_stock: 3}, {name: "Andy Warhol", description: "The Prince of Pop", price: 200, in_stock: 9}, {name: "Flash", description: "Superfast person", price: 120, in_stock: 20}, {name: "Superman", description: "Various superhuman abilities, such as incredible strength and impervious skin.", price: 500, in_stock: 3}, {name: "Wonder woman", description: "powerful, strong-willed character who does not back down from a fight or a challenge.", price: 3000, in_stock: 10}])
 
 
 require 'csv'

@@ -1,0 +1,7 @@
+
+<% @order_items.each do |orderitem| %>
+
+  <% product = Product.find_by(id: orderitem.product_id) %>
+  <%= orderitem.quantity %>
+  <%= product.name %>
+<% end %>
