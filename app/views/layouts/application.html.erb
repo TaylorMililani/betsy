@@ -33,7 +33,15 @@
       </ul>
     </nav>
   </header>
-
+  <% unless flash.empty? %>
+    <section class="alert__container">
+      <% flash.each do |name, message| %>
+        <div class="alert alert-<%= name %>">
+          <%= content_tag :div, message.html_safe %>
+        </div>
+      <% end %>
+    </section>
+  <% end %>
     <%= yield %>
   </body>
 </html>

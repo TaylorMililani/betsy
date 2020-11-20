@@ -1,15 +1,16 @@
 class Order < ApplicationRecord
-  validates :name, presence: true
+  validates :name, presence: true, on: :update
   validates :email,
             format: { with: URI::MailTo::EMAIL_REGEXP, message: "Invalid Format"  },
-            length: { minimum: 4, maximum: 254 }
-  validates :address, presence: true
-  validates :cc_num, presence: true, length: { minimum: 12 }
-  validate :valid_card_number?
-  validates :cvv, presence: true, length: { in: 3..4 }
-  validates :cc_expiration, presence: true
-  validates :billing_zip, presence: true
-end
+            length: { minimum: 4, maximum: 254 },
+            on: :update
+  validates :address, presence: true, on: :update
+  validates :cc_num, presence: true, length: { minimum: 12 }, on: :update
+  validate :valid_card_number?, on: :update
+  validates :cvv, presence: true, length: { in: 3..4 }, on: :update
+  validates :cc_expiration, presence: true, on: :update
+  validates :billing_zip, presence: true, on: :update
+
 
 
 def valid_card_number?
@@ -31,3 +32,4 @@ end
 
 
 
+end
