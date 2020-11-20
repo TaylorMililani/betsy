@@ -1,19 +1,18 @@
 class UsersController < ApplicationController
 
-    def index
-        @users = User.all 
-    end
+    # def index
+    #     @users = User.all 
+    # end
 
-    def show
-        @user = User.find_by(id: params[:id])
+    # def show
+    #     @user = User.find_by(id: params[:id])
 
-        if @product.nil?
-            head :not_found
-            return
-        end
-    end
+    #     if @product.nil?
+    #         head :not_found
+    #         return
+    #     end
+    # end
 
-    
 
     def create
         auth_hash = request.env["omniauth.auth"]
@@ -22,13 +21,13 @@ class UsersController < ApplicationController
             flash[:success] = "Logged in as returning user #{user.username}"
         else
             user = User.build_from_github(auth_hash)
-        end
 
-        if user.save
-            flash[:success] = "Logged in as new user #{user.username}"
-        else
-            flash[:error] = "Could not create new user account: #{user.errors.messages}"
-            return redirect_to root_path
+            if user.save
+                flash[:success] = "Logged in as new user #{user.username}"
+            else
+                flash[:error] = "Could not create new user account: #{user.errors.messages}"
+                return redirect_to root_path
+            end
         end
 
         session[:user_id] = user.id
@@ -42,8 +41,18 @@ class UsersController < ApplicationController
         redirect_to root_path
     end
 
+    def current
+        @current_user = User.find_by(uid: auth_hash[:uid], provider: "github")
+        unless @current_user
+            flash[:error] = "You are not logged in"
+            redirect_to root_path
+            return
+        end
+    end
+
+
     private
-    def product_params
+    def user_params
         params.require(:user).permit(:email, :uid, :provider, :username)
     end
 end

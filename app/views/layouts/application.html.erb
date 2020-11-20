@@ -22,6 +22,15 @@
         <li><%= link_to "Merchants", root_path %></li>
         <li><%= link_to "Categories", categories_path %></li>
         <li><%= link_to "Orders", orders_path %></li>
+        <li>
+          <% if session[:user_id] %>
+            <% user = User.find(session[:user_id]) %>
+            <%= user.username %><%= user.email %>
+            <%= link_to "Logout", logout_path, method: "delete" %>
+          <% else %>
+            <%= link_to "Login with GitHub", github_login_path %>
+          <% end %>  
+        </li>
       </ul>
     </nav>
   </header>
