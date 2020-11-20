@@ -19,14 +19,7 @@ class OrdersController < ApplicationController
   end
 
   def create
-    if session[:order_id]
 
-      @order = Order.new(order_params)
-    else
-      @order = Order.new
-
-      session[:order_id] = @order.id
-    end
     @order = Order.new(order_params)
     if @order.save
       flash[:success] = "Successfully created #{@order.id}"

@@ -12,7 +12,7 @@ class OrderItemsController < ApplicationController
     elsif session[:order_id].nil?
       @new_order = Order.create
       session[:order_id] = @new_order.id
-      @order_item.order_id = @new_order.id
+      # @order_item.order_id = @new_order.id
     else
       flash.now[:error] = "hmm..something went wrong"
     end
