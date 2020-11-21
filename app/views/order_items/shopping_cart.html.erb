@@ -4,9 +4,12 @@
 <ul>
 <% @order_items.each do |orderitem| %>
   <li>
+    <% @total = 0 %>
     <%= orderitem.name %>
     <p>$<%= orderitem.price %>0</p>
     <p>Quantity: <%= orderitem.quantity %></p>
+    <% @total += orderitem.price %>
   </li>
 <% end %>
 </ul>
+
