@@ -1,7 +1,8 @@
 class OrderItemsController < ApplicationController
 
-  def shopping_cart # is this necessary?
-    @order_items = OrderItem.all  #.find_by(id: order_id) # find by order id?
+  def shopping_cart
+    order = Order.find_by(id: session[:order_id])
+    @order_items = OrderItem.where(order_id: order.id)
   end
 
   def create
