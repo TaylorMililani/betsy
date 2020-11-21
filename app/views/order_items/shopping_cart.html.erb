@@ -1,7 +1,12 @@
+<h1>Your cart</h1>
 
+
+<ul>
 <% @order_items.each do |orderitem| %>
-
-  <% product = Product.find_by(id: orderitem.product_id) %>
-  <%= orderitem.quantity %>
-  <%= product.name %>
+  <li>
+    <%= orderitem.name %>
+    <p>$<%= orderitem.price %>0</p>
+    <p>Quantity: <%= orderitem.quantity %></p>
+  </li>
 <% end %>
+</ul>
