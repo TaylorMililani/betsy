@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   resources :orders
 
   resources :categories, only: [:new, :create, :index, :show]
+
+  resources :users
   
   get "/auth/github", as: "github_login"
   get "/auth/github/callback", to: "users#create"
