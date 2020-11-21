@@ -82,7 +82,7 @@ ActiveRecord::Schema.define(version: 2020_11_20_035711) do
     t.string "username"
   end
 
-  add_foreign_key "products", "users"
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"
+  add_foreign_key "products", "users"
 end
