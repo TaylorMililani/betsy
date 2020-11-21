@@ -39,17 +39,18 @@ class OrdersController < ApplicationController
   end
 
   def update
+    if @order.order_items.empty?
+      flash[:error] = "There is no item in your cart!"
+      redirect_to products_path
+    end
 
-    ##if orderitems.empty?
-    # error
-    # else
-    # update@order
     if @order.nil?
       head :not_found
       return
     elsif @order.update(order_params)
-      flash[:success] = "Successfully updated #{@order.id}"
-      redirect_to orders_path
+      @order.update_attribute(:status, "paid" )
+      flash[:success] = "Your order ##{@order.id} has been placed!"
+      redirect_to order_path(@order)
       return
     else
       render :edit, status: :bad_request
@@ -72,7 +73,7 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    return params.require(:order).permit(:name, :email, :address, :cc_num, :cc_expiration, :cvv, :billing_zip)
+    return params.require(:order).permit(:name, :email, :address, :cc_num, :cc_expiration, :cvv, :billing_zip, :status, :order_items)
   end
 
   def find_order
