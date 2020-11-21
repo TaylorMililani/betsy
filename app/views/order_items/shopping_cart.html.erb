@@ -10,13 +10,13 @@
         <p><%= orderitem.name %></p>
         <p>$<%= orderitem.price %>0</p>
         <p>Quantity: <%= orderitem.quantity %></p>
-        <% link_to "Edit", edit_order_item_path %>
-        <% link_to "Remove", order_item_path(@order_item.id), method: :delete %>
+        <%# link_to "Edit", edit_order_item_path %>
+        <%# link_to "Remove", order_item_path(@order_item.id), method: :delete %>
       </li>
     <% end %>
   </ul>
+<!--  <h3>Total: $<%#= @order_items.cart_total %></h3>-->
 <% end %>
 
 
 
-<h3>Total: $<%= @total %></h3>
