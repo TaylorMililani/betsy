@@ -40,7 +40,7 @@ describe Product do
         # Assert
         expect(@product.valid?).must_equal false
         expect(@product.errors.messages).must_include :price
-        expect(@product.errors.messages[:price]).must_equal ["can't be blank", "is not a number"]
+        expect(@product.errors.messages[:price]).must_include "can't be blank"
       end
 
       it "is invalid with 0 price" do
@@ -55,5 +55,16 @@ describe Product do
         expect(product_2.errors.messages[:price]).must_equal ["must be greater than 0"]
       end
 
+      it "is invalid if price is not a number" do
+        #arrange
+        product_2 = Product.create(name: "LeBron James", description: "Amazing basketball player", price: "aaa", in_stock: 20, photo: "url", user_id: @user.id)
+        # act
+        product_2.save
+
+        # Assert
+        expect(product_2.valid?).must_equal false
+        expect(product_2.errors.messages).must_include :price
+        expect(product_2.errors.messages[:price]).must_equal ["is not a number"]
+      end
   end
 end
