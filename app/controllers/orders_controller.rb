@@ -45,6 +45,10 @@ class OrdersController < ApplicationController
     if @order.order_items.empty?
       flash[:error] = "There is no item in your cart!"
       redirect_to products_path
+    elsif @order.stock_error > 0
+        flash[:error] = "Our stock have changed. We have updated your cart to reflect the available quantity."
+        redirect_to shopping_cart_path(@order)
+        return
     else
       if @order.nil?
         head :not_found
@@ -60,10 +64,7 @@ class OrdersController < ApplicationController
         redirect_to products_path
         return
       end
-
     end
-
-
   end
 
   def destroy

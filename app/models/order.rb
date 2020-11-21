@@ -30,8 +30,36 @@ class Order < ApplicationRecord
     end
   end
 
+  def stock_error
+    order_items = self.order_items
+    out_of_stock = 0
+    order_items.each do |order_item|
+      if order_item.quantity > order_item.product.in_stock
+        if order_item.product.in_stock == 0
+          order_item.destroy
+        else
+          order_item.quantity = order_item.product.in_stock
+          order_item.save
+        end
+        out_of_stock += 1
+      end
+    end
+
+    return out_of_stock
+
+  end
+
   def place_order
     self.update_attribute(:status, "paid" )
+    self.order_items.each do |item|
+      if item.product.in_stock >= item.quantity
+        item.product.in_stock -= item.quantity
+      else
+        flash[:error] = "Not enough stock available for purchase. Current stock for : #{item.product.in_stock} "
+        redirect_to products_path
+      end
+      item.product.save!
+    end
   end
 
 
