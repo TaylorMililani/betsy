@@ -35,6 +35,9 @@ class OrdersController < ApplicationController
     if @order.nil?
       head :not_found
       return
+    elsif @order.status != "pending"
+      flash[:error] = "We are processing your order. Please call us at 911 if you want to make changes! Thank you!"
+      redirect_to order_path(@order)
     end
   end
 
@@ -42,20 +45,24 @@ class OrdersController < ApplicationController
     if @order.order_items.empty?
       flash[:error] = "There is no item in your cart!"
       redirect_to products_path
+    else
+      if @order.nil?
+        head :not_found
+        return
+      elsif @order.update(order_params)
+        @order.update_attribute(:status, "paid" )
+        flash[:success] = "Your order ##{@order.id} has been placed!"
+        redirect_to order_path(@order)
+        return
+      else
+        flash[:error] = "Something went wrong!"
+        redirect_to products_path
+        return
+      end
+
     end
 
-    if @order.nil?
-      head :not_found
-      return
-    elsif @order.update(order_params)
-      @order.update_attribute(:status, "paid" )
-      flash[:success] = "Your order ##{@order.id} has been placed!"
-      redirect_to order_path(@order)
-      return
-    else
-      render :edit, status: :bad_request
-      return
-    end
+
   end
 
   def destroy
