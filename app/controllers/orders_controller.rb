@@ -50,8 +50,8 @@ class OrdersController < ApplicationController
         head :not_found
         return
       elsif @order.update(order_params)
-        @order.update_attribute(:status, "paid" )
-        @order.order_items = []
+        @order.place_order
+        session[:order_id] = nil
         flash[:success] = "Your order ##{@order.id} has been placed!"
         redirect_to order_path(@order)
         return
