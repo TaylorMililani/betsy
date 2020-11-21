@@ -4,6 +4,7 @@ class OrderItem < ApplicationRecord
 
   validates :quantity, presence: true, numericality: { greater_than: 0 }
 
+
   # def cart_total
   #   total = 0.0
   #   @order_items.each do |orderitem|
@@ -12,3 +13,4 @@ class OrderItem < ApplicationRecord
   #   return total
   # end
 end
+

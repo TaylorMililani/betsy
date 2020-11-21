@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 2020_11_20_035711) do
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.string "description"
+    t.string "category"
     t.float "price"
     t.integer "in_stock"
     t.string "photo"
@@ -82,7 +83,7 @@ ActiveRecord::Schema.define(version: 2020_11_20_035711) do
     t.string "username"
   end
 
-  add_foreign_key "products", "users"
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"
+  add_foreign_key "products", "users"
 end
