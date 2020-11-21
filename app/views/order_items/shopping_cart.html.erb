@@ -1,7 +1,22 @@
+<h1>Your Shopping Cart</h1>
 
-<% @order_items.each do |orderitem| %>
-
-  <% product = Product.find_by(id: orderitem.product_id) %>
-  <%= orderitem.quantity %>
-  <%= product.name %>
+<% if @order_items.nil? %>
+  <h3>No items in your shopping cart right now):</h3>
+  <%= link_to "Browse Products", products_path %>
+<% else %>
+  <ul>
+    <% @order_items.each do |orderitem| %>
+      <li>
+        <p><%= orderitem.name %></p>
+        <p>$<%= orderitem.price %>0</p>
+        <p>Quantity: <%= orderitem.quantity %></p>
+        <% link_to "Edit", edit_order_item_path %>
+        <% link_to "Remove", order_item_path(@order_item.id), method: :delete %>
+      </li>
+    <% end %>
+  </ul>
 <% end %>
+
+
+
+<h3>Total: $<%= @total %></h3>
