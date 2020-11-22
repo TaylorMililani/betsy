@@ -70,14 +70,22 @@ class ProductsController < ApplicationController
     @product = Product.find_by(id: product_id)
 
     if @product.nil?
-      head :not_found
+      flash.now[:error] = "Product cannot be deleted."
+      redirect_to products_path
       return
     end
 
-    @product.destroy
+    if @product.order_items
+      flash[:error] = "Product cannot be deleted, because it's a part of an order."
+      redirect_to product_path(@product)
+      return
+    else
+      @product.destroy
+      redirect_to products_path
+      return
+    end
 
-    redirect_to products_path
-    return
+
   end
 
 
