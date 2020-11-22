@@ -17,7 +17,7 @@
             <%# orderitem.destroy %>
           <%# end %>
         <% end %>
-        <%= link_to "Remove", url: order_item_path(orderitem.id), method: :delete %>
+        <%= link_to "Remove", order_item_path(orderitem.id), method: :delete %>
       </li>
     <% end %>
   </ul>
