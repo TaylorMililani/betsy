@@ -17,6 +17,7 @@ class OrderItemsController < ApplicationController
     else
       flash.now[:error] = "hmm..something went wrong"
     end
+
     @order_item = OrderItem.create!(name: product.name, price: product.price, quantity: params[:quantity], product_id: params[:product_id], order_id: session[:order_id])
     redirect_to shopping_cart_path
     # make  sure there's enough inventory??
