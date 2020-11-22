@@ -1,9 +1,7 @@
-
 <h1>Your Shopping Cart</h1>
 
 <% if @order_items.nil? %>
   <h3>No items in your shopping cart right now):</h3>
-  <%= link_to "Browse Products", products_path %>
 <% else %>
   <ul>
     <% @order_items.each do |orderitem| %>
@@ -12,7 +10,14 @@
         <p>$<%= orderitem.price %>0</p>
         <p>Quantity: <%= orderitem.quantity %></p>
         <%# link_to "Edit", edit_order_item_path %>
-        <%# link_to "Remove", order_item_path(@order_item.id), method: :delete %>
+        <%= form_with(url: order_item_path(orderitem.id)) do %>
+          <%= number_field_tag(:quantity, orderitem.quantity, in: 0..orderitem.product.in_stock, step: 1) %>
+          <%= submit_tag("Update Quantity", class: "btn btn-primary") %>
+          <%# if orderitem.quantity == 0 %>
+            <%# orderitem.destroy %>
+          <%# end %>
+        <% end %>
+        <%= link_to "Remove", url: order_item_path(orderitem.id), method: :delete %>
       </li>
     <% end %>
   </ul>
