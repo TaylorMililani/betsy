@@ -8,7 +8,7 @@ class Order < ApplicationRecord
             on: :update
   validates :address, presence: true, on: :update
   validates :cc_num, presence: true, length: { minimum: 12 }, on: :update
-  validate :valid_card_number?, on: :update
+  # validate :valid_card_number?, on: :update
   validates :cvv, presence: true, length: { in: 3..4 }, on: :update
   validates :cc_expiration, presence: true, on: :update
   validates :billing_zip, presence: true, on: :update
@@ -46,7 +46,6 @@ class Order < ApplicationRecord
     end
 
     return out_of_stock
-
   end
 
   def place_order
@@ -60,6 +59,15 @@ class Order < ApplicationRecord
       end
       item.product.save!
     end
+  end
+
+
+  def total_cost
+    total = 0
+    self.order_items.each do |item|
+        total += item.subtotal
+    end
+    return total
   end
 
 

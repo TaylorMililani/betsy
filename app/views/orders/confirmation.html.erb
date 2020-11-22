@@ -1,0 +1,32 @@
+<h3 class="text-center">Thank you for your order!</h3>
+<h4 class='text-center'>Receipt for Order #<%= @order.id %></h4>
+
+<main class='card-body'>
+  <p class="card-text">
+    Submitted on: <%= @order.updated_at.strftime("%A, %b %d") %>
+    <br>
+    Status: <%= @order.status %>
+    <br>
+    Total: <%= number_to_currency(@order.total_cost) %>
+  </p>
+  Items purchased:
+  <table class='table'>
+    <thead>
+    <tr>
+      <th class='text-center'>Item Name</th>
+      <th class='text-center'>Quantity</th>
+      <th class='text-center'>Subtotal</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @order.order_items.each do |item| %>
+      <tr>
+        <td class='text-center'><%= link_to item.product.name, product_path(item.product) %></td>
+        <td class='text-center'><%= item.quantity %></td>
+        <td class='text-center'><%= number_to_currency(item.subtotal) %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</main>
