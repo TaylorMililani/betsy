@@ -1,4 +1,10 @@
 class ProductsController < ApplicationController
+
+  before_action :find_product, only: [:show, :edit, :update, :destroy]
+  before_action :require_login, only: [:create, :edit, :update, :destroy]
+  before_action :require_ownership, only: [:edit, :update, :destroy]
+
+
   def index
     @products = Product.all
   end
@@ -8,8 +14,6 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @product = Product.find_by(id: params[:id])
-
     if @product.nil?
       head :not_found
       return
@@ -38,23 +42,13 @@ class ProductsController < ApplicationController
   end
 
   def edit
-    @product = Product.find_by(id: params[:id])
     @categories = Category.all
-
-    if @product.nil?
-      head :not_found
-      return
-    end
   end
 
   def update
-    @product = Product.find_by(id: params[:id])
     @categories = Category.all
 
-    if @product.nil?
-      head :not_found
-      return
-    elsif @product.update(product_params)
+    if @product.update(product_params)
       flash[:success] = "#{@product.name} updated successfully"
       redirect_to products_path # go to the list of products
       return
@@ -66,15 +60,6 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    product_id = params[:id]
-    @product = Product.find_by(id: product_id)
-
-    if @product.nil?
-      flash.now[:error] = "Product cannot be deleted."
-      redirect_to products_path
-      return
-    end
-
     if @product.order_items
       flash[:error] = "Product cannot be deleted, because it's a part of an order."
       redirect_to product_path(@product)
@@ -84,15 +69,27 @@ class ProductsController < ApplicationController
       redirect_to products_path
       return
     end
-
-
   end
-
-
 
   private
   def product_params
     params.require(:product).permit(:name, :description, :category, :price, :in_stock, :photo, category_ids:[])
   end
 
+  def require_ownership
+    @product = Product.find_by(id: params[:id])
+    if @product && @product.user!= current_user
+      flash[:error] = "You can't modify a product that you don't own"
+      redirect_to product_path(@product)
+    end
+  end
+
+  def find_product
+    @product = Product.find_by(id: params[:id])
+    if @product.nil?
+      flash[:error] = "Product not found."
+      redirect_to products_path, status: :not_found
+      return
+    end
+  end
 end
