@@ -28,8 +28,9 @@ class OrderItemsController < ApplicationController
     if @order_item.nil?
       flash.now[:error] = "hmm, we couldn't find a product in your cart with that id"
     else
-      @order_item.update(:quantity)
+      @order_item.update(quantity: params[:quantity])
     end
+    redirect_to shopping_cart_path
   end
 
   def destroy

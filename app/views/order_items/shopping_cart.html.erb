@@ -10,7 +10,7 @@
         <p>$<%= orderitem.price %>0</p>
         <p>Quantity: <%= orderitem.quantity %></p>
         <%# link_to "Edit", edit_order_item_path %>
-        <%= form_with(url: order_item_path(orderitem.id)) do %>
+        <%= form_with(url: order_item_path(orderitem.id), method: :patch) do %>
           <%= number_field_tag(:quantity, orderitem.quantity, in: 0..orderitem.product.in_stock, step: 1) %>
           <%= submit_tag("Update Quantity", class: "btn btn-primary") %>
           <%# if orderitem.quantity == 0 %>
