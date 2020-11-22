@@ -3,6 +3,10 @@ class ApplicationController < ActionController::Base
 
   def current_user
     @current_user = User.find_by(id: session[:user_id])
+
+    #to test action under merchant account comment out upper line uncomment lower
+    # @current_user = User.find_by(id: 1)
+
     # unless @current_user
     #   flash[:error] = "You are not logged in"
     #   redirect_to root_path
