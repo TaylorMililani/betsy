@@ -17,23 +17,38 @@ class OrderItemsController < ApplicationController
     else
       flash.now[:error] = "hmm..something went wrong"
     end
+
     @order_item = OrderItem.create!(name: product.name, price: product.price, quantity: params[:quantity], product_id: params[:product_id], order_id: session[:order_id])
     redirect_to shopping_cart_path
     # make  sure there's enough inventory??
   end
 
   def update
-    #upda
+    @order_item = OrderItem.find_by(id: params[:id])
+    if @order_item.nil?
+      flash.now[:error] = "hmm, we couldn't find a product in your cart with that id"
+    else
+      @order_item.update(:quantity)
+    end
   end
 
   def destroy
+    @order_item = OrderItem.find_by(id: params[:id])
+    if @order_item.quantity == 0
+      @order_item.destroy
+      redirect_back(fallback_location: :back)
+      return
+    end
     if @order_item.nil?
-      flash.now[:error] = "Hmm, we couldn't find an order item with that id"
+      flash.now[:error] = "hmm, we couldn't find a product in your cart with that id"
+      redirect_back(fallback_location: :back)
+      return
     else
       @order_item.destroy
-      # add back to product inventory
+      flash[:success] = "Item removed from cart"
+      redirect_back(fallback_location: :back)
+      return
     end
-    redirect_to root_path #for now
   end
 
   private
