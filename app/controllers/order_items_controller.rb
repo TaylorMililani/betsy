@@ -23,31 +23,17 @@ class OrderItemsController < ApplicationController
   end
 
   def update
-    @order_item = OrderItem.find_by(id: params[:id])
-    if @order_item.nil?
-      flash.now[:error] = "hmm, we couldn't find a product in your cart with that id"
-    else
-      @order_item.update(:quantity)
-    end
+    #upda
   end
 
   def destroy
-    @order_item = OrderItem.find_by(id: params[:id])
-    if @order_item.quantity == 0
-      @order_item.destroy
-      redirect_back(fallback_location: :back)
-      return
-    end
     if @order_item.nil?
-      flash.now[:error] = "hmm, we couldn't find a product in your cart with that id"
-      redirect_back(fallback_location: :back)
-      return
+      flash.now[:error] = "Hmm, we couldn't find an order item with that id"
     else
       @order_item.destroy
-      flash[:success] = "Item removed from cart"
-      redirect_back(fallback_location: :back)
-      return
+      # add back to product inventory
     end
+    redirect_to root_path #for now
   end
 
   private

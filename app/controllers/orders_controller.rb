@@ -57,13 +57,22 @@ class OrdersController < ApplicationController
         @order.place_order
         session[:order_id] = nil
         flash[:success] = "Your order ##{@order.id} has been placed!"
-        redirect_to order_path(@order)
+        redirect_to order_confirmation_path(@order)
         return
       else
         flash[:error] = "Something went wrong!"
         redirect_to products_path
         return
       end
+    end
+  end
+
+  def confirmation
+    @order = Order.find_by(id: params[:id])
+    if @order.nil?
+      raise
+      flash.now[:error] = "Something happened! Please try again!"
+      redirect_to products_path
     end
   end
 
@@ -82,7 +91,7 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    return params.require(:order).permit(:name, :email, :address, :cc_num, :cc_expiration, :cvv, :billing_zip, :status, :order_items)
+    return params.require(:order).permit(:id,:name, :email, :address, :cc_num, :cc_expiration, :cvv, :billing_zip, :status, :order_items)
   end
 
   def find_order

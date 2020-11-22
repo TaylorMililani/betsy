@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root to: 'products#homepage'
 
   get 'products/homepage', to: 'products#homepage', as: 'homepage'
+  get "/orders/:id/confirmation", to: "orders#confirmation", as: "order_confirmation"
 
   resources :products do
     resources :reviews, only: [:new, :create]

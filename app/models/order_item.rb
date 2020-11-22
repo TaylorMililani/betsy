@@ -12,5 +12,11 @@ class OrderItem < ApplicationRecord
   #   end
   #   return total
   # end
+  #
+
+  def subtotal
+    return self.quantity * self.price
+  end
+
 end
 
