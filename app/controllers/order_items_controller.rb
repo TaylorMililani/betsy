@@ -1,8 +1,8 @@
 class OrderItemsController < ApplicationController
 
   def shopping_cart
-    order = Order.find_by(id: session[:order_id])
-    @order_items = OrderItem.where(order_id: order.id)
+    @order = Order.find_by(id: session[:order_id])
+    @order_items = OrderItem.where(order_id: @order.id)
   end
 
   def create

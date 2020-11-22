@@ -21,6 +21,7 @@
       </li>
     <% end %>
   </ul>
+  <%= link_to "Checkout", edit_order_path(@order.id), class: "btn btn-primary" %>
 <!--  <h3>Total: $<%#= @order_items.cart_total %></h3>-->
 <% end %>
 
