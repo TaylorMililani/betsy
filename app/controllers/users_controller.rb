@@ -2,6 +2,7 @@ class UsersController < ApplicationController
 
     def index
         @users = User.all
+        @user_products = Product.where(user_id: params[:id])
     end
 
     def show
