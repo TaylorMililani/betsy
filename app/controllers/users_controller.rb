@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
     before_action :only_see_own_page, only: :show
+
     def index
         @users = User.all
         @user_products = Product.where(user_id: params[:id])
@@ -42,19 +43,12 @@ class UsersController < ApplicationController
         redirect_to root_path
     end
 
-    def current
-        @current_user = User.find_by(uid: auth_hash[:uid], provider: "github")
-        unless @current_user
-            flash[:error] = "You must be logged in to see this page"
-            redirect_to root_path
-            return
-        end
-    end
+
 
     def only_see_own_page
         @user = User.find_by(id: params[:id])
       
-        if current_user != @user
+        if @current_user != @user
           redirect_to root_path, notice: "Sorry, but you are only allowed to view your own profile page."
         end
     end
