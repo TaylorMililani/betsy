@@ -3,7 +3,7 @@
 
 <main class='card-body'>
   <p class="card-text">
-    Submitted on: <%= @order.updated_at.strftime("%A, %b %d") %>
+    Submitted on: <%= @order.created_at.strftime("%A, %b %d") %>
     <br>
     Status: <%= @order.status %>
     <br>
