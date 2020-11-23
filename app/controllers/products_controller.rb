@@ -73,7 +73,8 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    if @product.order_items
+    if !@product.order_items.empty?
+      
       flash[:error] = "Product cannot be deleted, because it's a part of an order."
       redirect_to product_path(@product)
       return
@@ -91,7 +92,7 @@ class ProductsController < ApplicationController
 
   def require_ownership
     @product = Product.find_by(id: params[:id])
-    if @product && @product.user!= current_user
+    if @product && @product.user!= @current_user
       flash[:error] = "You can't modify a product that you don't own"
       redirect_to product_path(@product)
     end
