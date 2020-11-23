@@ -80,7 +80,7 @@ class ProductsController < ApplicationController
       return
     else
       @product.destroy
-      redirect_to products_path
+      redirect_to user_path(session[:user_id])
       return
     end
   end

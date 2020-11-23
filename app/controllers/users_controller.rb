@@ -6,7 +6,7 @@ class UsersController < ApplicationController
         @user_products = Product.where(user_id: params[:id])
     end
 
-    def show
+    def show_user
         @user = User.find_by(id: params[:id])
 
         if @user.nil?
