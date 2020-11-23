@@ -1,7 +1,7 @@
 <h2>List of Orders</h2>
 <section class="order-summary__container">
   <h3> Order Details</h3>
-<!--  <h4> Total Revenue: $ <%#= '%.2f' % @order.total_revenue%></h4>-->
+  <h4> Total Revenue: $ <%= '%.2f' % @order.total_revenue%></h4>
   <table class="table">
     <thead>
     <tr>
@@ -32,4 +32,3 @@
 </section>
 </section>
 
-<%#= link_to "Back to Homepage", root_path, class:"btn btn-primary" %>

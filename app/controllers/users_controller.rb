@@ -15,7 +15,6 @@ class UsersController < ApplicationController
         end
     end
 
-
     def create
         auth_hash = request.env["omniauth.auth"]
         user = User.find_by(uid: auth_hash[:uid], provider: "github")
@@ -43,6 +42,8 @@ class UsersController < ApplicationController
         redirect_to root_path
     end
 
+    def manage_orders
+    end
 
 
     def only_see_own_page

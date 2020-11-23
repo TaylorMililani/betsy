@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-
+  # before_action :require_login, only: [:show]
   before_action :find_order, only: [:show, :edit, :update, :destroy]
 
 
@@ -9,7 +9,8 @@ class OrdersController < ApplicationController
 
   def show
     if @order.nil?
-      head :not_found
+      flash[:error] = "Invalid Order"
+      redirect_back(fallback_location: root_path)
       return
     end
   end
