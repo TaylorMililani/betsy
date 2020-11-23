@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
 
   before_action :find_product, only: [:show, :edit, :update, :destroy]
-  before_action :require_login, only: [:create, :edit, :update, :destroy]
+  # before_action :only_see_own_page, only: [:create, :edit, :update, :destroy]
   before_action :require_ownership, only: [:edit, :update, :destroy]
 
 
@@ -28,7 +28,7 @@ class ProductsController < ApplicationController
   def create
     #create a new product
     @product = Product.new(product_params)
-    @product.user = current_user
+    @product.user = @current_user
 
     if params[:product][:photo].nil?
       @product.photo = "/soul_dummy.jpeg"
