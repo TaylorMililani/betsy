@@ -19,14 +19,7 @@ class OrdersController < ApplicationController
   end
 
   def create
-    if session[:order_id]
 
-      @order = Order.new(order_params)
-    else
-      @order = Order.new
-
-      session[:order_id] = @order.id
-    end
     @order = Order.new(order_params)
     if @order.save
       flash[:success] = "Successfully created #{@order.id}"
@@ -42,25 +35,44 @@ class OrdersController < ApplicationController
     if @order.nil?
       head :not_found
       return
+    elsif @order.status != "pending"
+      flash[:error] = "We are processing your order. Please call us at 911 if you want to make changes! Thank you!"
+      redirect_to order_path(@order)
     end
   end
 
   def update
-
-    ##if orderitems.empty?
-    # error
-    # else
-    # update@order
-    if @order.nil?
-      head :not_found
-      return
-    elsif @order.update(order_params)
-      flash[:success] = "Successfully updated #{@order.id}"
-      redirect_to orders_path
-      return
+    if @order.order_items.empty?
+      flash[:error] = "There is no item in your cart!"
+      redirect_to products_path
+    elsif @order.stock_error > 0
+        flash[:error] = "Our stock have changed. We have updated your cart to reflect the available quantity."
+        redirect_to shopping_cart_path(@order)
+        return
     else
-      render :edit, status: :bad_request
-      return
+      if @order.nil?
+        head :not_found
+        return
+      elsif @order.update(order_params)
+        @order.place_order
+        session[:order_id] = nil
+        flash[:success] = "Your order ##{@order.id} has been placed!"
+        redirect_to order_confirmation_path(@order)
+        return
+      else
+        flash[:error] = "Something went wrong!"
+        redirect_to products_path
+        return
+      end
+    end
+  end
+
+  def confirmation
+    @order = Order.find_by(id: params[:id])
+    if @order.nil?
+      raise
+      flash.now[:error] = "Something happened! Please try again!"
+      redirect_to products_path
     end
   end
 
@@ -79,7 +91,7 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    return params.require(:order).permit(:name, :email, :address, :cc_num, :cc_expiration, :cvv, :billing_zip)
+    return params.require(:order).permit(:id,:name, :email, :address, :cc_num, :cc_expiration, :cvv, :billing_zip, :status, :order_items)
   end
 
   def find_order
