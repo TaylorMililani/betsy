@@ -28,7 +28,16 @@ class ProductsController < ApplicationController
   def create
     #create a new product
     @product = Product.new(product_params)
+    @product.user = current_user
+
+    if params[:product][:photo].nil?
+      @product.photo = "/soul_dummy.jpeg"
+    else
+      @product.photo = upload_photo(params[:product][:photo])
+    end
+
     @categories = Category.all
+
 
     if @product.save
       flash[:success] = "#{@product.name} was successfully created!"
@@ -48,9 +57,13 @@ class ProductsController < ApplicationController
   def update
     @categories = Category.all
 
+    if params[:product][:photo]
+      @product.photo = upload_photo(params[:product][:photo])
+    end
+
     if @product.update(product_params)
       flash[:success] = "#{@product.name} updated successfully"
-      redirect_to products_path # go to the list of products
+      redirect_to product_path(@product) # go to the list of products
       return
     else # save failed :(
     flash.now[:error] = "Something happened. #{@product.name} not updated."
@@ -73,7 +86,7 @@ class ProductsController < ApplicationController
 
   private
   def product_params
-    params.require(:product).permit(:name, :description, :category, :price, :in_stock, :photo, category_ids:[])
+    params.require(:product).permit(:name, :description, :category, :price, :in_stock, category_ids:[])
   end
 
   def require_ownership
@@ -91,5 +104,12 @@ class ProductsController < ApplicationController
       redirect_to products_path, status: :not_found
       return
     end
+  end
+
+  def upload_photo(uploaded_file)
+    File.open(Rails.root.join('public', 'uploads', uploaded_file.original_filename), 'wb') do |file|
+      file.write(uploaded_file.read)
+    end
+    return "/uploads/#{uploaded_file.original_filename}"
   end
 end
