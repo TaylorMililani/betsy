@@ -70,7 +70,6 @@ class OrdersController < ApplicationController
   def confirmation
     @order = Order.find_by(id: params[:id])
     if @order.nil?
-      raise
       flash.now[:error] = "Something happened! Please try again!"
       redirect_to products_path
     end
@@ -91,7 +90,7 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    return params.require(:order).permit(:id,:name, :email, :address, :cc_num, :cc_expiration, :cvv, :billing_zip, :status, :order_items)
+    return params.require(:order).permit(:id, :name, :email, :address, :cc_num, :cc_expiration, :cvv, :billing_zip, :status, :order_items)
   end
 
   def find_order

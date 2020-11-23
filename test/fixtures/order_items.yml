@@ -1,0 +1,14 @@
+orderitem1:
+  name: husky
+  price: 10000.0
+  quantity: 2
+  order: order1
+  product: product1
+
+orderitem2:
+  name: husky2
+  price: 10000.0
+  quantity: 3
+  order: paid_order
+  product: product1
+

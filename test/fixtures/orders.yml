@@ -1,0 +1,30 @@
+order1:
+  name: name1
+  email: aaa@aa.com
+  address: 1234 Main st
+  cvv: 123
+  cc_num: 4539 1488 0343 6467
+  cc_expiration: 1121
+  billing_zip: 12345
+  status: pending
+
+
+paid_order:
+  name: name2
+  email: aaa@aa.com
+  address: 1234 Main st
+  cvv: 123
+  cc_num: 4539 1488 0343 6467
+  cc_expiration: 1121
+  billing_zip: 12345
+  status: paid
+
+empty_order:
+  name: name2
+  email: aaa@aa.com
+  address: 1234 Main st
+  cvv: 123
+  cc_num: 4539 1488 0343 6467
+  cc_expiration: 1121
+  billing_zip: 12345
+  status: paid
