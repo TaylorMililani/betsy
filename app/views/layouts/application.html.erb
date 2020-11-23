@@ -7,11 +7,12 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%#= stylesheet_link_tag 'index', media: 'all', 'data-turbolinks-track': 'reload' %>
   </head>
 
 
   <body>
-  <header>
+  <aside class="header">
     <h1>
       <%= link_to "SoulStore", root_path %>
     </h1>
@@ -27,14 +28,14 @@
           <% if session[:user_id] %>
             <% user = User.find(session[:user_id]) %>
             <%= user.username %><%= user.email %>
-            <%= link_to "Logout", logout_path, method: "delete" %>
+            <%= link_to "Logout", logout_path, method: "delete", class: "link" %>
           <% else %>
-            <%= link_to "Login with GitHub", github_login_path %>
+            <%= link_to "Login with GitHub", github_login_path, class: "link" %>
           <% end %>  
         </li>
       </ul>
     </nav>
-  </header>
+  </aside>
   <% unless flash.empty? %>
     <section class="alert__container">
       <% flash.each do |name, message| %>

@@ -13,14 +13,12 @@ class OrderItemsController < ApplicationController
     elsif session[:order_id].nil?
       @new_order = Order.create
       session[:order_id] = @new_order.id
-      # @order_item.order_id = @new_order.id
     else
       flash.now[:error] = "hmm..something went wrong"
     end
 
     @order_item = OrderItem.create!(name: product.name, price: product.price, quantity: params[:quantity], product_id: params[:product_id], order_id: session[:order_id], user: product.user )
     redirect_to shopping_cart_path
-    # make  sure there's enough inventory??
   end
 
   def update
@@ -52,9 +50,4 @@ class OrderItemsController < ApplicationController
     end
   end
 
-  private
-
-  # def order_item_params
-  #   return params.require(:order_item).permit(:name, :price, :quantity, :order_id, :product_id)
-  # end
 end
