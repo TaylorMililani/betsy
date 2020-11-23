@@ -25,7 +25,7 @@
     <%= link_to "Delete", product_path(@product.id), class: "btn btn-danger", method: "delete", data: { confirm: "Are you sure?" } %>
   </section>
 
-  <%#= @product.reviews %>
+  <%= @product.reviews.empty? %>
 
 <!--  <section>-->
 <!--    <h3>Reviews</h3>-->

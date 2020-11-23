@@ -12,7 +12,7 @@
 
 
   <body>
-  <aside>
+  <aside class="header">
     <h1>
       <%= link_to "SoulStore", root_path %>
     </h1>
@@ -28,9 +28,9 @@
           <% if session[:user_id] %>
             <% user = User.find(session[:user_id]) %>
             <%= user.username %><%= user.email %>
-            <%= link_to "Logout", logout_path, method: "delete" %>
+            <%= link_to "Logout", logout_path, method: "delete", class: "link" %>
           <% else %>
-            <%= link_to "Login with GitHub", github_login_path %>
+            <%= link_to "Login with GitHub", github_login_path, class: "link" %>
           <% end %>  
         </li>
       </ul>

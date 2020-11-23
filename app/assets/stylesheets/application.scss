@@ -40,6 +40,19 @@
     border-color:#ffeeba
 }
 
+nav li {
+  display: inline;
+  text-align: center;
+  padding: 20px;
+  color: #86cfda;
+}
+
+nav li .link {
+  float: right;
+  padding-right: 50px;
+  color: #86cfda;
+}
+
 //ul .product {
 //  display: grid;
 //  grid-template-columns: 33% 33% 33%;
