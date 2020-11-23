@@ -1,34 +1,39 @@
 class ReviewsController < ApplicationController
   # def index
-  #   @reviews = Review.all #.find_by(id: product_id) ??
+  #   @product = Product.find_by(id: params[:product_id])
+  #   @reviews = Review.where(id: @product.id)
   # end
-  #
+
   def new
     @product = Product.find_by(id: params[:product_id])
     @review = Review.new
   end
 
   def create
-    @product = Product.find_by(id: params[:product_id])
-    @review = Review.new #(:title, :rating, :text_field)
-    user_id = User.find_by(id: @product[:user_id])
+    @review = Review.new(
+        title: params[:title],
+        rating: params[:rating],
+        text_field: params[:text_field],
+        product_id: params[:product_id]
+    )
+
+    user_id = Product.find_by(id: params[:product_id]).user_id
+
     if session[:user_id] == user_id
       flash.now[:error] = "You can't review your own product!"
-      redirect_to root_path
-      return
-    end
-
-    if @review.save
-      flash[:success] = "Thanks for your feedback!"
+    elsif @review.save && (session[:user_id] != merchant_id)
+      flash[:success] = "Your review was added."
     else
-      flash.now[:error] = "Hmm..something went wrong, your review was not saved"
+      flash[:failure] = "Error: Review could not be added."
     end
-    redirect_to product_path(@product.id) # ??
+    redirect_to
     return
   end
 
   # private
+
   # def review_params
-  #   return params(:review).permit(:title, :rating, :text_field)
+  #   return params.require(:review).permit(:title, :rating, :text_field, :product_id)
   # end
+
 end
