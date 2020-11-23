@@ -5,13 +5,14 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'stylesheet', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%#= stylesheet_link_tag '', media: 'all', 'data-turbolinks-track': 'reload' %>
   </head>
 
 
   <body>
-  <header>
+  <aside>
     <h1>
       <%= link_to "SoulStore", root_path %>
     </h1>
@@ -34,7 +35,7 @@
         </li>
       </ul>
     </nav>
-  </header>
+  </aside>
   <% unless flash.empty? %>
     <section class="alert__container">
       <% flash.each do |name, message| %>

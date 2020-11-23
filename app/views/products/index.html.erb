@@ -1,7 +1,7 @@
 
 <h1> List of products</h1>
 
-<ul>
+<ul class="products">
   <% @products.each do |product|  %>
     <li>
       <%= link_to product.name, product_path(product.id) %>
