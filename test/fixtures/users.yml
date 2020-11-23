@@ -3,3 +3,9 @@ user1:
   uid: 60956142
   provider: github
   email: li.lea.dai@gmail.com
+
+user2:
+  username: "OlgaSe"
+  uid: 26051021
+  provider: github
+  email: olga.tka4eva@gmail.com

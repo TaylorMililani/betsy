@@ -91,7 +91,7 @@ class ProductsController < ApplicationController
 
   def require_ownership
     @product = Product.find_by(id: params[:id])
-    if @product && @product.user!= current_user
+    if @product && @product.user!= @current_user
       flash[:error] = "You can't modify a product that you don't own"
       redirect_to product_path(@product)
     end
