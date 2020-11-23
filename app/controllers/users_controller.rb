@@ -1,17 +1,18 @@
 class UsersController < ApplicationController
+    before_action :only_see_own_page, only: :show
+    def index
+        @users = User.all
+        @user_products = Product.where(user_id: params[:id])
+    end
 
-    # def index
-    #     @users = User.all 
-    # end
+    def show
+        @user = User.find_by(id: params[:id])
 
-    # def show
-    #     @user = User.find_by(id: params[:id])
-
-    #     if @product.nil?
-    #         head :not_found
-    #         return
-    #     end
-    # end
+        if @user.nil?
+            head :not_found
+            return
+        end
+    end
 
 
     def create
@@ -44,15 +45,24 @@ class UsersController < ApplicationController
     def current
         @current_user = User.find_by(uid: auth_hash[:uid], provider: "github")
         unless @current_user
-            flash[:error] = "You are not logged in"
+            flash[:error] = "You must be logged in to see this page"
             redirect_to root_path
             return
         end
     end
 
+    def only_see_own_page
+        @user = User.find_by(id: params[:id])
+      
+        if current_user != @user
+          redirect_to root_path, notice: "Sorry, but you are only allowed to view your own profile page."
+        end
+    end
 
     private
     def user_params
         params.require(:user).permit(:email, :uid, :provider, :username)
     end
+
+    
 end

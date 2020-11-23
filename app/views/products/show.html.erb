@@ -1,6 +1,6 @@
 
   <h2><%= @product.name %></h2>
-  <img src="/soul_dummy.jpeg" alt="person with a soul">
+  <img src="<%=@product.photo%>" alt="product photo" style="max-width:200px; max-height: 200px">
   <p><%= @product.description %></p>
   <p>Category: <% @product.categories.each do |category|%><%= category.name%> | <% end%></p>
   <p>Price: <%= @product.price %></p>
