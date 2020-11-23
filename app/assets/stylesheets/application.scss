@@ -53,11 +53,20 @@ nav li .link {
   color: #86cfda;
 }
 
-//ul .product {
-//  display: grid;
-//  grid-template-columns: 33% 33% 33%;
-//  grid-template-rows: 33% 33% 33%;
-//}
+.header {
+  padding-top: 50px;
+  background-color: black;
+}
+
+.header h1 {
+  padding: 30px;
+  font-size: 60px;
+  font-family: cursive;
+}
+
+ul .product {
+  display: inline;
+}
 
 //body {
 //  text-align: center;
