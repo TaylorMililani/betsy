@@ -8,7 +8,7 @@
 
 Category.create([{name: "Science"}, {name: "Activism"}, {name: "Art"}, {name: "Superhero"}, {name: "Politics"}, {name: "Animal"}, {name: "Business"}, {name: "Celebrities"}, {name: "Happiness"}])
 
-users = User.create([{username: "STEMantics", email: "I_love_science@hotmath.com"}, {username: "eclectic_activism", email: "human_rights_r_cool@intersectionality.com"}])
+users = User.create([{uid: 60956142, provider: "github", username: "nerdyistrendy", email: "li.lea.dai@gmail.com"}, {uid: 58778401, provider: "github", username: "TaylorMililani", email: "taylotmililani@gmail.com"}, {uid: 65133873, provider: "github", username: "indiakato", email: "india.kato@gmail.com"}, {uid: 26051021, provider: "github", username: "OlgaSe", email: "olga.tka4eva@gmail.com"}])
 
 Product.create([{name: "Frida Kahlo", description: "Artistic and creative artist", price: 500, in_stock: 10, user_id: 1}, {name: "Salvador Dali", description: "Surrealistic painter", price: 1000, in_stock: 3, user_id: 2}, {name: "Andy Warhol", description: "The Prince of Pop", price: 200, in_stock: 9, user_id: 2}, {name: "Flash", description: "Superfast person", price: 120, in_stock: 20, user_id: 2}, {name: "Superman", description: "Various superhuman abilities, such as incredible strength and impervious skin.", price: 500, in_stock: 3, user_id: 1}, {name: "Wonder woman", description: "powerful, strong-willed character who does not back down from a fight or a challenge.", price: 3000, in_stock: 10, user_id: 2}])
 
