@@ -1,4 +1,4 @@
-<h1><%= @user.username %></h1>
+<h1>Welcome, <%= @user.username %></h1>
 <h3>Your Products</h3>
 <ul>
     <% @user.products.each do |product| %>
@@ -6,3 +6,9 @@
     <% end %>
 </ul>
 
+<h3>Actions</h3>
+<ul>
+    <li><%= link_to "Create new product", new_product_path %></li>
+    <li><%= link_to "Create new category", new_category_path %></li>
+    <li><%= link_to "View orders", manage_orders_path %></li>
+</ul>

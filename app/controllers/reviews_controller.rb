@@ -11,7 +11,7 @@ class ReviewsController < ApplicationController
 
   def create
 
-    @product = Product.find_by(id: params[:product_id])
+    product = Product.find_by(id: params[:product_id])
     user_id = product[:user_id]
 
     @review = Review.new(
@@ -41,11 +41,5 @@ class ReviewsController < ApplicationController
     redirect_to product_path(product.id)
     return
   end
-
-  # private
-  #
-  # def review_params
-  #   params.require(:review).permit(:rating, :text_field, :product_id, :title)
-  # end
 
 end

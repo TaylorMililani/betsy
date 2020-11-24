@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
-  # before_action :require_login, only: [:show]
-  before_action :find_order, only: [:show, :edit, :update, :destroy]
+  before_action :require_login, only: [:show]
+  before_action :find_order, except: [:index, :new, :create ]
 
 
   def index
@@ -13,6 +13,8 @@ class OrdersController < ApplicationController
       redirect_back(fallback_location: root_path)
       return
     end
+    @order_items = @current_user.order_items.where(order_id:@order.id)
+
   end
 
   def new
@@ -69,23 +71,39 @@ class OrdersController < ApplicationController
   end
 
   def confirmation
-    @order = Order.find_by(id: params[:id])
     if @order.nil?
       flash.now[:error] = "Something happened! Please try again!"
       redirect_to products_path
     end
-  end
-
-  def destroy
-    if @order.nil?
-      head :not_found
-      return
+    if session[:order_id] == @order.id
+      @order_items = @order.order_items
+    else
+      flash[:error] = "You are not authorized to view this! Sneaky!"
+      redirect_to products_path
     end
 
-    @order.destroy
-    flash[:success] = "Successfully destroyed #{@order.id}"
-    redirect_to orders_path
-    return
+  end
+
+  def cancel_order
+    if @order.nil?
+      flash.now[:error] = "Something happened! Please try again!"
+      redirect_to products_path
+    end
+    @order.update_attribute(:status, "cancelled" )
+    flash[:success] = "Successfully cancelled #{@order.id}"
+    redirect_back(fallback_location: manage_orders_path)
+  end
+
+  def complete_order
+    if @order.nil?
+      raise
+      flash.now[:error] = "Something happened! Please try again!"
+      redirect_to products_path
+    else
+      @order.update_attribute(:status, "complete" )
+      flash[:success] = "Successfully shipped #{@order.id}"
+      redirect_back(fallback_location: manage_orders_path)
+    end
   end
 
   private
