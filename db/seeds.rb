@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Category.create([{name: "Science"}, {name: "Activism"}, {name: "Art"}, {name: "Superhero"}, {name: "Politics"}, {name: "Animal"}, {name: "Business"}, {name: "Celebrities"}, {name: "Happiness"}])
+Category.create([{name: "Art"}, {name: "Superhero"}, {name: "Science"}, {name: "Activism"},  {name: "Politics"}, {name: "Animal"}, {name: "Business"}, {name: "Celebrities"}, {name: "Happiness"}])
 
 users = User.create([{uid: 60956142, provider: "github", username: "nerdyistrendy", email: "li.lea.dai@gmail.com"}, {uid: 58778401, provider: "github", username: "TaylorMililani", email: "taylotmililani@gmail.com"}, {uid: 65133873, provider: "github", username: "indiakato", email: "india.kato@gmail.com"}, {uid: 26051021, provider: "github", username: "OlgaSe", email: "olga.tka4eva@gmail.com"}])
 
