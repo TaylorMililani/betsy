@@ -82,14 +82,15 @@ describe ProductsController do
     it "will update model with a valid post request" do
       perform_login(user2)
 
-      id = Product.last.id
+      product = Product.find_by_name("Frida Kahlo")
+      id = product.id
       expect {
         patch product_path(id), params: new_product_hash
       }.wont_change "Product.count"
 
       must_respond_with :redirect
 
-      product = Product.find_by(id: id)
+      product.reload
       expect(product.name).must_equal new_product_hash[:product][:name]
       expect(product.description).must_equal new_product_hash[:product][:description]
       expect(product.user_id).must_equal new_product_hash[:product][:user_id]
@@ -108,7 +109,7 @@ describe ProductsController do
     it "will not update if the params are invalid" do
       perform_login(user2)
       new_product_hash[:product][:name] = nil
-      product = Product.last
+      product = Product.find_by_name("Frida Kahlo")
 
       expect {
         patch product_path(product.id), params: new_product_hash
