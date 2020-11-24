@@ -5,3 +5,11 @@ product1:
   in_stock: 5
   user: user1
   categories: [1,2]
+
+product2:
+  name: Frida Kahlo
+  description: Mexican painter known for her many portraits, self-portraits, and works inspired by the nature and artifacts of Mexico
+  price: 500.0
+  in_stock: 6
+  user: user2
+  categories: [2,4]
