@@ -6,11 +6,11 @@ class ProductsController < ApplicationController
 
 
   def index
-    @products = Product.all
+    @products = Product.products_in_stock
   end
 
   def homepage
-    @products = Product.all
+    @products = Product.products_in_stock
   end
 
   def show

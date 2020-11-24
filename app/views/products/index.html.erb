@@ -13,12 +13,13 @@
             <img src="https://liquidmindsite.com/wp-content/uploads/2019/06/1_soul.jpg" alt="product photo", width = 200px>
             <%else%>
             <img src="<%= product.photo%>" alt="product photo", width = 200px>
-            <%end%>
+          <%end%>
           <div class="desc"><%=product.name%></div>
+          <div class="desc"><%=number_to_currency(product.price)%></div>
         </a>
       </div>
-
-
   <% end %>
   </div>
+
+
 </div>
