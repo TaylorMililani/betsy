@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
     before_action :only_see_own_page, only: :show
 
+
     def index
         @users = User.all
         @user_products = Product.where(user_id: params[:id])

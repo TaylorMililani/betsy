@@ -1,7 +1,6 @@
 class User < ApplicationRecord
     has_many :products
     has_many :orders
-    # has_many :orderitems, through: :products
     has_many :order_items
 
 

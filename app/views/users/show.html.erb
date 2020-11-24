@@ -1,14 +1,31 @@
 <h1>Welcome, <%= @user.username %></h1>
 <h3>Your Products</h3>
-<ul>
-    <% @user.products.each do |product| %>
-        <li><%= link_to product.name, product_path(product) %></li>
-    <% end %>
-</ul>
+<section>
+    <table style="width:100%">
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Quantity</th>
+            <th>Actions</th>
+        </tr>
+        <% @user.products.each do |product| %>
+            <tr>
+                <td><%= link_to product.name, product_path(product) %></td>
+                <td><%= product.price %></td>
+                <td><%= product.description %></td>
+                <td><%= product.in_stock %></td>
+                <td>
+                    <%= link_to "Edit", edit_product_path(product), class: "btn btn-primary" %>
+                    <%= link_to "Delete", product_path(product), class: "btn btn-danger", method: "delete", data: { confirm: "Are you sure?" } %>
+                </td>
+            </tr>
+        <% end %>
+    </table> 
+</section>
 
-<h3>Actions</h3>
-<ul>
-    <li><%= link_to "Create new product", new_product_path %></li>
-    <li><%= link_to "Create new category", new_category_path %></li>
-    <li><%= link_to "View orders", manage_orders_path %></li>
-</ul>
+    <section>
+        <%= link_to "Create new product", new_product_path, class: "btn btn-primary" %>
+        <%= link_to "Create new category", new_category_path, class: "btn btn-primary" %>
+        <%= link_to "View orders", manage_orders_path, class: "btn btn-primary" %>
+    </section>
