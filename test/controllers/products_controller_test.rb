@@ -50,9 +50,50 @@ describe ProductsController do
       expect(created_product.user).must_equal logged_in_user
     end
 
+    it "will not create a book with invalid parameters" do
+      product_hash[:product][:name] = nil
 
+      expect {
+        post products_path, params: product_hash
+      }.must_differ "Product.count", 0
+
+      must_respond_with :bad_request
+    end
 
   end
 
+  describe "update" do
 
+    let (:user2) {
+      users(:user2)
+    }
+
+    let (:new_product_hash) {
+      {
+        product: {
+          name: "Sting",
+          description: "singer",
+          price: 123,
+          in_stock: 5,
+          user_id: user2.id
+        }
+      }
+    }
+    it "will update model with a valid post request" do
+      perform_login(user2)
+
+      id = Product.last.id
+      expect {
+        patch product_path(id), params: new_product_hash
+      }.wont_change "Product.count"
+
+      must_respond_with :redirect
+
+      product = Product.find_by(id: id)
+      expect(product.name).must_equal new_product_hash[:product][:name]
+      expect(product.description).must_equal new_product_hash[:product][:description]
+      expect(product.user_id).must_equal new_product_hash[:product][:user_id]
+    end
+
+  end
 end
