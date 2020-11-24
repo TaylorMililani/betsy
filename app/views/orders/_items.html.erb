@@ -1,0 +1,28 @@
+<main class='card-body'>
+<p class="card-text">
+  Submitted on: <%= @order.created_at.strftime("%A, %b %d") %>
+  <br>
+  Status: <%= @order.status %>
+  <br>
+</p>
+Items purchased:
+<table class='table'>
+  <thead>
+  <tr>
+    <th class='text-center'>Item Name</th>
+    <th class='text-center'>Quantity</th>
+    <th class='text-center'>Subtotal</th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @order_items.each do |item| %>
+    <tr>
+      <td class='text-center'><%= link_to item.product.name, product_path(item.product) %></td>
+      <td class='text-center'><%= item.quantity %></td>
+      <td class='text-center'><%= number_to_currency(item.subtotal) %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+</main>

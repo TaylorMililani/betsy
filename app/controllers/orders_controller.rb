@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  # before_action :require_login, only: [:show]
+  before_action :require_login, only: [:show]
   before_action :find_order, except: [:index, :new, :create ]
 
 
@@ -13,6 +13,8 @@ class OrdersController < ApplicationController
       redirect_back(fallback_location: root_path)
       return
     end
+    @order_items = @current_user.order_items.where(order_id:@order.id)
+
   end
 
   def new
@@ -73,6 +75,13 @@ class OrdersController < ApplicationController
       flash.now[:error] = "Something happened! Please try again!"
       redirect_to products_path
     end
+    if session[:order_id] == @order.id
+      @order_items = @order.order_items
+    else
+      flash[:error] = "You are not authorized to view this! Sneaky!"
+      redirect_to products_path
+    end
+
   end
 
   def cancel_order
