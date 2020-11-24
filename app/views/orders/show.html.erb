@@ -4,10 +4,8 @@
   <li><strong>Address: </strong><%= @order[:address] %></li>
   <li><strong>Card Number: </strong>************ <%= @order.cc_num[-4..-1] %></li>
   <li><strong>Card Exp. Date: </strong><%= @order[:cc_expiration] %></li>
-
-
-<% @order.order_items.each do |orderitem| %>
-    <% product = Product.find_by(id: orderitem.product_id) %>
-    <li><%= product.name %> <%= orderitem.quantity %></li>
-<% end %>
 </ul>
+  <%= render partial: "items"  %>
+
+
+
