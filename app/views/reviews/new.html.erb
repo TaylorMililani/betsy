@@ -5,18 +5,19 @@
     </strong>
   <% end %>
 </section>
+<% if @product.nil? == false %>
+  <%= form_with model: @review, url: product_reviews_path(@product.id) do |f| %>
 
-<%= form_with model: @review, url: product_reviews_path(@product.id) do |f| %>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
 
-  <%= f.label :title %>
-  <%= f.text_field :title %>
+    <%= f.label :text_field %>
+    <%= f.text_field :text_field %>
 
-  <%= f.label :text_field %>
-  <%= f.text_field :text_field %>
+    <%= f.label :rating %>
+    <%= f.select :rating, [1, 2, 3, 4, 5] %>
 
-  <%= f.label :rating %>
-  <%= f.select :rating, [1, 2, 3, 4, 5] %>
+    <%= f.submit "Submit Review", class: "btn btn-primary" %>
 
-  <%= f.submit "Submit Review", class: "btn btn-primary" %>
-
+  <% end %>
 <% end %>

@@ -30,9 +30,9 @@
     <ul>
       <% @product.reviews.each do |review| %>
         <li>
-          Title: <%=review.title %>
-          Review: <%= review.text_field %>
-          Rating: <%= review.rating %>
+          <p>Title: <%= review.title %></p>
+          <p>Review: <%= review.text_field %></p>
+          <p>Rating: <%= review.rating %></p>
         </li>
       <% end %>
     </ul>
