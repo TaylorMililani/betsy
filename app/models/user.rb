@@ -2,6 +2,8 @@ class User < ApplicationRecord
     has_many :products
     has_many :orders
     has_many :order_items
+    validates :username, presence: true, uniqueness: true
+    validates :email, presence: true, uniqueness: true
 
 
     def self.build_from_github(auth_hash)
