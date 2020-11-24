@@ -95,5 +95,28 @@ describe ProductsController do
       expect(product.user_id).must_equal new_product_hash[:product][:user_id]
     end
 
+    it "will respond with bad request for invalid ids" do
+      id = -1
+
+      expect {
+        patch product_path(id), params: new_product_hash
+      }.wont_change "Product.count"
+
+      must_respond_with :not_found
+    end
+
+    it "will not update if the params are invalid" do
+      perform_login(user2)
+      new_product_hash[:product][:name] = nil
+      product = Product.last
+
+      expect {
+        patch product_path(product.id), params: new_product_hash
+      }.wont_change "Product.count"
+
+        product.reload
+        must_respond_with :bad_request
+        expect(product.name).wont_be_nil
+    end
   end
 end
