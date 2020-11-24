@@ -58,13 +58,11 @@ class OrdersController < ApplicationController
         return
       elsif @order.update(order_params)
         @order.place_order
-        session[:order_id] = nil
         flash[:success] = "Your order ##{@order.id} has been placed!"
         redirect_to order_confirmation_path(@order)
         return
       else
-        flash[:error] = "Something went wrong!"
-        redirect_to products_path
+        render :edit, status: :bad_request
         return
       end
     end
@@ -77,6 +75,7 @@ class OrdersController < ApplicationController
     end
     if session[:order_id] == @order.id
       @order_items = @order.order_items
+      session[:order_id] = nil
     else
       flash[:error] = "You are not authorized to view this! Sneaky!"
       redirect_to products_path

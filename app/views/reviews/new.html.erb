@@ -1,4 +1,12 @@
-<%= form_with model: @reviews, url: product_reviews_path do |f| %>
+<section class="flash-message">
+  <% flash.each do |name, message| %>
+    <strong class="<%= name %>">
+      <%= message %>
+    </strong>
+  <% end %>
+</section>
+
+<%= form_with model: @review, url: product_reviews_path(@product.id) do |f| %>
 
   <%= f.label :title %>
   <%= f.text_field :title %>
@@ -7,7 +15,7 @@
   <%= f.text_field :text_field %>
 
   <%= f.label :rating %>
-  <%= f.select :category, [1, 2, 3, 4, 5] %>
+  <%= f.select :rating, [1, 2, 3, 4, 5] %>
 
   <%= f.submit "Submit Review", class: "btn btn-primary" %>
 

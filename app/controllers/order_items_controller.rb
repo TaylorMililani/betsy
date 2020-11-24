@@ -2,7 +2,9 @@ class OrderItemsController < ApplicationController
 
   def shopping_cart
     @order = Order.find_by(id: session[:order_id])
-    @order_items = OrderItem.where(order_id: @order.id)
+    if @order.nil? == false
+      @order_items = OrderItem.where(order_id: @order.id)
+    end
   end
 
   def create
@@ -15,9 +17,10 @@ class OrderItemsController < ApplicationController
       session[:order_id] = @new_order.id
     else
       flash.now[:error] = "hmm..something went wrong"
+      redirect_to products_path
     end
 
-    @order_item = OrderItem.create!(name: product.name, price: product.price, quantity: params[:quantity], product_id: params[:product_id], order_id: session[:order_id], user: product.user )
+    @order_item = OrderItem.create!(name: product.name, price: product.price, quantity: params[:quantity], product_id: product.id, order_id: session[:order_id], user_id: product.user.id)
     redirect_to shopping_cart_path
   end
 

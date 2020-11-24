@@ -27,6 +27,7 @@ CSV.foreach(PRODUCTS_FILE, :headers => true) do |row|
   product.description = row['description']
   product.price = row['price']
   product.in_stock = row['in_stock']
+  product.photo = row['photo']
   product.user_id = 3
 
   successful = product.save

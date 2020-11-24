@@ -18,6 +18,18 @@ class OrderItem < ApplicationRecord
     return self.quantity * self.price
   end
 
+  def self.filter_user_status(user: nil, status: nil)
+    return [] if user.nil?
+    items = []
+    if status
+       OrderItem.where(user_id: user.id).each do |item|
+         items << item if item.order.status == status
+       end
+    else
+      items = OrderItem.where(user_id: user.id)
+    end
+    return items
+  end
 
 end
 

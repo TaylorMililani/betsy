@@ -1,15 +1,15 @@
-name,description,category_id,price,in_stock
-Donald J. Trump before the election,"Try our most arrogant, most shameless and most ignorant soul and you will finally be carefree. (Please do not bother other people after use.)",5,999000,10
-Donald J. Trump after the election,"The taste of shattered dreams and the pain of growing up. ",5,99900,10
-Barack Obama ,"Hope is the thing with feathers - Emily Dickinson ",politicians,1100000,10
-Kamala Harris,"First Woman and Woman of Color as Vice President! How awesome is that? Enjoy the proud moment.",5,999000,10
-Siberian Husky,"Be a gorgeous and goofy drama queen! Your mom can never be angry at you!",6,999000,10
-German Shepherd Dog,"Who doesn't want a noble, diligent, loyal, and highly intelligent friend?",6,999000,10
-Gray Wolf,"Be your best self - cooperative, family-oriented, loyal, respectful, brave, and trustworthy.",6,999000,10
-Cat,"Cats are great! (Perfunctory smile) (Just kidding! I love all animals! They have the purest souls!)",6,999000,10
+name,description,category_id,price,in_stock,photo
+Donald J. Trump before the election,"Try our most arrogant, most shameless and most ignorant soul and you will finally be carefree. (Please do not bother other people after use.)",5,999000,10,https://d279m997dpfwgl.cloudfront.net/wp/2019/07/AP_19201004713022-1000x667.jpg
+Donald J. Trump after the election,"The taste of shattered dreams and the pain of growing up. ",5,99900,10,https://cdn.newsapi.com.au/image/v1/9ada6dec01bf709291f7584b13af3009
+Barack Obama,"Hope is the thing with feathers - Emily Dickinson ",politicians,1100000,10,https://cdn1.ykso.co/thepostercorp/product/obama-hope-poster-print-by-24-x-36/images/15729a0/1503610303/generous.jpg
+Kamala Harris,"First Woman and Woman of Color as Vice President! How awesome is that? Enjoy the proud moment.",5,999000,10,https://whyy.org/wp-content/uploads/2020/08/kamala_harris_generic_adam_schultz_02_081520.jpg
+Siberian Husky,"Be a gorgeous and goofy drama queen! Your mom can never be angry at you!",6,999000,10,https://cdn.shopify.com/s/files/1/0994/0236/articles/siberian-husky.jpg?v=1502391918
+German Shepherd Dog,"Who doesn't want a noble, diligent, loyal, and highly intelligent friend?",6,999000,10,https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2eEMyGuxzMR80tzknI3eFuHHwV1HKS5xrIw&usqp=CAU
+Gray Wolf,"Be your best self - cooperative, family-oriented, loyal, respectful, brave, and trustworthy.",6,999000,10,https://media.nationalgeographic.org/assets/photos/c2b/998/c2b9986f-5ccb-45f5-b324-aaeccbf5f0b2.jpg
+Cat,"Cats are great! (Perfunctory smile) (Just kidding! I love all animals! They have the purest souls!)",6,999000,10,https://static.toiimg.com/photo/msid-67586673/67586673.jpg?3918697
 Bill Gates,"Have you ever wanted to have the brain of a successful entrepreneur? Buy now to get all the skills and talents of Microsoft founder Bill Gates.",7,"1,500,000",15
 Paul Allen,"Be in the mindset of businessman, philanthropist and investor, Paul Allen, for the day!",7,1100000,10
-Mark Zuckerberg,"Try out being a tech mogul for the day!",7,1300000,10
+Mark Zuckerberg,"Try out being a tech mogul for the day!",7,1300000,1
 Michael B. Jordan,"Ever wanted to be in movies like Black Panther or TV shows like Friday Night Lights? Grab your Michael B. Jordan soul today!",8,989000,20
 SZA,"Get the singing voice of an angel, SZA",8,999000,25
 Snooki,"Become a meatball for the day and wreak havoc on the Jersey Shore!",8,850000,30
