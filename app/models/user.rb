@@ -1,6 +1,7 @@
 class User < ApplicationRecord
     has_many :products
     has_many :orders
+    has_many :order_items
 
 
     def self.build_from_github(auth_hash)
