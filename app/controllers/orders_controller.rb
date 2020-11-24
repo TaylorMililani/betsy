@@ -62,8 +62,7 @@ class OrdersController < ApplicationController
         redirect_to order_confirmation_path(@order)
         return
       else
-        flash[:error] = "Something went wrong!"
-        redirect_to products_path
+        render :edit, status: :bad_request
         return
       end
     end
