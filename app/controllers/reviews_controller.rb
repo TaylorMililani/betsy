@@ -23,7 +23,7 @@ class ReviewsController < ApplicationController
 
     unless session[:user_id] == nil
       if session[:user_id] == user_id
-        flash.now[:error] = "You can't review your own product!"
+        flash[:error] = "You can't review your own product!"
         redirect_back(fallback_location: :back)
         return
       end
