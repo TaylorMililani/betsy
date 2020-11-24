@@ -1,10 +1,20 @@
 
-<h1> List of products</h1>
+<div class="container">
 
-<ul class="products">
+  <h1 class="font-weight-light text-center text-lg-left mt-4 mb-0">List of products</h1>
+
+  <hr class="mt-2 mb-5">
+
+  <div class="row text-center text-lg-left">
   <% @products.each do |product|  %>
-    <li>
-      <%= link_to product.name, product_path(product.id) %>
-    </li>
+      <div class="col-lg-3 col-md-4 col-6">
+        <a href="<%= product_path(product.id) %>" class="d-block mb-4 h-100">
+            <img src="<%= product.photo%>" alt="product photo", width = 200px>
+          <div class="desc"><%=product.name%></div>
+        </a>
+      </div>
+
+
   <% end %>
-</ul>
+  </div>
+</div>
