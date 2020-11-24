@@ -3,7 +3,7 @@
   <img src="<%=@product.photo%>" alt="product photo" style="max-width:200px; max-height: 200px">
   <p><%= @product.description %></p>
   <p>Category: <% @product.categories.each do |category|%><%= category.name%> | <% end%></p>
-  <p>Price: <%= @product.price %></p>
+  <p>Price: <%= number_to_currency(@product.price) %></p>
   <p>In stock: <%= @product.in_stock %></p>
 
 
@@ -20,9 +20,11 @@
     <!--    to_root for now, add a link to a review page-->
     <%= link_to "Review", new_product_review_path(@product.id), class: "btn btn-primary" %>
     <!--    to_root for now, add a link to a cart-->
-
+    <% if @current_user == @product.user %>
     <%= link_to "Edit", edit_product_path(@product.id), class: "btn btn-primary" %>
     <%= link_to "Delete", product_path(@product.id), class: "btn btn-danger", method: "delete", data: { confirm: "Are you sure?" } %>
+    <% end %>
+
   </section>
 
   <section>
