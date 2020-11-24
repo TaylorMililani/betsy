@@ -14,6 +14,7 @@ class ProductsController < ApplicationController
   end
 
   def show
+
     if @product.nil?
       head :not_found
       return
