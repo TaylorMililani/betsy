@@ -15,9 +15,9 @@ class ReviewsController < ApplicationController
     user_id = product[:user_id]
 
     @review = Review.new(
-        rating: params[:rating],
-        text_field: params[:text_field],
-        title: params[:title],
+        rating: params[:review][:rating],
+        text_field: params[:review][:text_field],
+        title: params[:review][:title],
         product_id: params[:product_id]
     )
 

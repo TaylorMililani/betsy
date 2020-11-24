@@ -25,18 +25,16 @@
     <%= link_to "Delete", product_path(@product.id), class: "btn btn-danger", method: "delete", data: { confirm: "Are you sure?" } %>
   </section>
 
-  <%= @product.reviews.empty? %>
-
-<!--  <section>-->
-<!--    <h3>Reviews</h3>-->
-<!--    <ul>-->
-      <%# @product.reviews.each do |review| %>
-<!--        <li>-->
-          <%#= review.title %>
-          <%#= review.text_field %>
-          <%#= review.rating %>
-<!--        </li>-->
-      <%# end %>
-<!--    </ul>-->
-<!--  </section>-->
+  <section>
+    <h3>Reviews</h3>
+    <ul>
+      <% @product.reviews.each do |review| %>
+        <li>
+          Title: <%=review.title %>
+          Review: <%= review.text_field %>
+          Rating: <%= review.rating %>
+        </li>
+      <% end %>
+    </ul>
+  </section>
 
