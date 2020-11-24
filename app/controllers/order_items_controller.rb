@@ -20,7 +20,7 @@ class OrderItemsController < ApplicationController
       redirect_to products_path
     end
 
-    @order_item = OrderItem.create!(name: product.name, price: product.price, quantity: params[:quantity], product_id: product.id, order_id: session[:order_id])
+    @order_item = OrderItem.create!(name: product.name, price: product.price, quantity: params[:quantity], product_id: product.id, order_id: session[:order_id], user_id: product.user.id)
     redirect_to shopping_cart_path
   end
 

@@ -43,6 +43,9 @@ class UsersController < ApplicationController
     end
 
     def manage_orders
+        @status = params[:status]
+        @user_order_items = OrderItem.filter_user_status(user: @current_user, status: @status)
+        return
     end
 
 

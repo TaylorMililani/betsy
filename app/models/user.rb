@@ -15,10 +15,14 @@ class User < ApplicationRecord
         return user
     end
 
-    def total_revenue
+    def total_revenue(status = "all")
         total = 0
-        self.order_items.each do |item|
-            total += item.subtotal
+        self.order_items.find_each do |item|
+            if status == "all"
+                total += item.subtotal unless item.order.status == "cancelled"
+            else
+                total += item.subtotal if item.order.status == status
+            end
         end
         return total
     end
