@@ -12,9 +12,13 @@ class OrdersController < ApplicationController
       flash[:error] = "Invalid Order"
       redirect_back(fallback_location: root_path)
       return
+    else
+      @order_items = @current_user.order_items.where(order_id:@order.id)
+      if @order_items.empty?
+        flash[:error] = "You are not authorized to view this! Sneaky!"
+        redirect_to products_path
+      end
     end
-    @order_items = @current_user.order_items.where(order_id:@order.id)
-
   end
 
   def new

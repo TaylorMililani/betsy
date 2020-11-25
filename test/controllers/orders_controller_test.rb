@@ -43,6 +43,37 @@ describe OrdersController do
 
   end
 
+
+  describe "show" do
+    before do
+      perform_login(users(:user1))
+    end
+
+    it "can see order details if the order includes order_items from the logged in merchant" do
+
+      order = orders(:order1)
+      patch order_path(order), params: @order_hash
+
+      get order_path(order)
+      must_respond_with :success
+    end
+
+    it "cannot see the order if the order does not include order_items from the logged in merchant" do
+      order = orders(:order2)
+      patch order_path(order), params: @order_hash
+      get order_path(order)
+
+      must_respond_with :redirect
+      expect(flash[:error]).must_equal "You are not authorized to view this! Sneaky!"
+    end
+
+    it "will be redirected if the order does not exist" do
+      get order_path(-1)
+      must_respond_with :redirect
+      expect(flash[:error]).must_equal "Invalid Order"
+    end
+  end
+
   describe "update" do
     it "will update order " do
       order = orders(:order1)
