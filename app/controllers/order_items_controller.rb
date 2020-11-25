@@ -10,13 +10,19 @@ class OrderItemsController < ApplicationController
   def create
     product = Product.find_by(id: params[:product_id])
 
+    if product.in_stock == 0
+      flash[:error] = "I'm sorry, that product is out of stock!"
+      redirect_to products_path
+      return
+    end
+
     if session[:order_id]
       @order = Order.find_by(id: session[:order_id])
     elsif session[:order_id].nil?
       @new_order = Order.create
       session[:order_id] = @new_order.id
     else
-      flash.now[:error] = "hmm..something went wrong"
+      flash[:error] = "hmm..something went wrong"
       redirect_to products_path
     end
 
@@ -27,7 +33,7 @@ class OrderItemsController < ApplicationController
   def update
     @order_item = OrderItem.find_by(id: params[:id])
     if @order_item.nil?
-      flash.now[:error] = "hmm, we couldn't find a product in your cart with that id"
+      flash[:error] = "hmm, we couldn't find a product in your cart with that id"
     else
       @order_item.update(quantity: params[:quantity])
     end
@@ -38,17 +44,17 @@ class OrderItemsController < ApplicationController
     @order_item = OrderItem.find_by(id: params[:id])
     if @order_item.quantity == 0
       @order_item.destroy
-      redirect_back(fallback_location: :back)
+      redirect_to shopping_cart_path
       return
     end
     if @order_item.nil?
-      flash.now[:error] = "hmm, we couldn't find a product in your cart with that id"
-      redirect_back(fallback_location: :back)
+      flash[:error] = "hmm, we couldn't find a product in your cart with that id"
+      redirect_to shopping_cart_path
       return
     else
       @order_item.destroy
       flash[:success] = "Item removed from cart"
-      redirect_back(fallback_location: :back)
+      redirect_to shopping_cart_path
       return
     end
   end

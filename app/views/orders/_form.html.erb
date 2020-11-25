@@ -18,32 +18,32 @@
 
     <div class="form-group">
       <%= f.label :name %>
-      <%= f.text_field :name, class: "form-control"  %></div>
+      <%= f.text_field :name, :value => "Jane Doe", class: "form-control"  %></div>
 
     <div class="form-group">
       <%= f.label :email %>
-      <%= f.text_field :email, class: "form-control"  %></div>
+      <%= f.text_field :email, :value => "gg@gmail.com", class: "form-control"  %></div>
 
     <div class="form-group">
       <%= f.label :address %>
-      <%= f.text_field :address, class: "form-control"  %></div>
+      <%= f.text_field :address, :value => "123 Jane St, Seattle, WA, 98103", class: "form-control"  %></div>
 
     <div class="form-group">
       <%= f.label :cc_num, 'Credit Card Number' %>
-      <%= f.text_field :cc_num, class: "form-control"  %></div>
+      <%= f.text_field :cc_num, :value => "4539 1488 0343 6467", class: "form-control"  %></div>
 
     <div class="form-group">
       <%= f.label :cc_expiration, 'Expiration Date' %><br />
-      <%= f.text_field :cc_expiration, class: "form-control"  %></div>
+      <%= f.text_field :cc_expiration, :value => "11/21", class: "form-control"  %></div>
     </div>
 
     <div class="form-group">
       <%= f.label :cvv, 'CVV' %>
-      <%= f.text_field :cvv, class: "form-control"  %></div>
+      <%= f.text_field :cvv, :value => 123, class: "form-control"  %></div>
 
     <div class="form-group">
       <%= f.label :billing_zip, 'Billing Zip Code' %>
-      <%= f.text_field :billing_zip, class: "form-control"  %></div>
+      <%= f.text_field :billing_zip, :value => 98103, class: "form-control"  %></div>
 
     <div class="form-group">
       <%= f.submit action_name, class: "btn btn-primary" %></div>

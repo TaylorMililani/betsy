@@ -1,4 +1,4 @@
-
+<main class="product">
   <h2><%= @product.name %></h2>
   <img src="<%=@product.photo%>" alt="product photo" style="max-width:200px; max-height: 200px">
   <p><%= @product.description %></p>
@@ -28,15 +28,15 @@
   </section>
 
   <section>
-    <h3>Reviews</h3>
-    <ul>
+    <h4>Reviews</h4>
+    <ul class="reviews">
       <% @product.reviews.each do |review| %>
         <li>
-          Title: <%=review.title %>
-          Review: <%= review.text_field %>
-          Rating: <%= review.rating %>
+          <p>Title: <%= review.title %></p>
+          <p>Review: <%= review.text_field %></p>
+          <p>Rating: <%= review.rating %></p>
         </li>
       <% end %>
     </ul>
   </section>
-
+</main>

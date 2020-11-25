@@ -62,8 +62,9 @@ describe UsersController do
 
     it "cannot access merchant dashboard" do
       user = users(:user1)
-      get user_path(user), params: @auth_hash
-      must_respond_with :redirect
+
+      get user_path(user)
+      must_redirect_to root_path
       expect(flash[:error]).must_equal "Sorry, but you are only allowed to view your own profile page."
     end
   end

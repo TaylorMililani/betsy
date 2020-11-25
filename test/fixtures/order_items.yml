@@ -4,6 +4,7 @@ orderitem1:
   quantity: 2
   order: order1
   product: product1
+  user: user1
 
 orderitem2:
   name: husky2
@@ -11,4 +12,12 @@ orderitem2:
   quantity: 3
   order: paid_order
   product: product1
+  user: user2
 
+orderitem3:
+  name: husky3
+  price: 10000.0
+  quantity: 3
+  order: order2
+  product: product1
+  user: user2
