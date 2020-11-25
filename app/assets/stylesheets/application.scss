@@ -45,12 +45,14 @@ nav li {
   text-align: center;
   padding: 20px;
   color: #86cfda;
+  font-size: large;
 }
 
 nav li .link {
   float: right;
   padding-right: 50px;
   color: #86cfda;
+
 }
 
 .header {
@@ -61,12 +63,12 @@ nav li .link {
 .header h1 {
   padding: 30px;
   font-size: 60px;
-  font-family: cursive;
+  text-decoration: none;
 }
 
-ul .product {
-  display: inline;
-}
+//ul .product {
+//  display: inline;
+//}
 
 //body {
 //  text-align: center;
