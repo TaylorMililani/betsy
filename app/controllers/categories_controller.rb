@@ -1,4 +1,5 @@
 class CategoriesController < ApplicationController
+  before_action :require_login, only: [:new, :create]
 
   def index
     @categories = Category.all
@@ -26,8 +27,7 @@ class CategoriesController < ApplicationController
       redirect_to categories_path
       return
     else
-      flash.now[:error] = "Something went wrong. #{@category.errors.messages[:name]}"
-      render :new
+      render :new, status: :bad_request
       return
     end
   end
