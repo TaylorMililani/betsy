@@ -4,24 +4,18 @@ describe Order do
   before do
     @new_order = Order.new(name: "name1", email: "aa@gmail.com", address: "15 Jane Street, Seattle, WA", cc_num: "4539 1488 0343 6467", cc_expiration: "1121",
                            cvv: 123, billing_zip: 12345 )
-    @order1 = orders(:order1)
-
-    @product1 = products(:product1)
-    @new_product1 = Product.create(name: @product1.name, price: @product1.price, in_stock: @product1.in_stock)
-
-    @new_order_item = OrderItem.create(product: @new_product, order: @new_order)
   end
 
   describe 'relations' do
     it 'has many order items' do
-      expect(@order1).must_respond_to :order_items
+      expect(@new_order).must_respond_to :order_items
     end
   end
 
   describe 'validations' do
     it 'is valid when parameters are present' do
       expect(@new_order.valid?).must_equal true
-      expect(@new_order.name).must_equal @order1.name
+      expect(@new_order.name).must_equal "name1"
     end
 
     it 'is invalid without a valid cc number' do
@@ -83,6 +77,14 @@ describe Order do
       expect(@new_order.valid?).must_equal true
       @new_order.update(email: '1234.com')
       expect(@new_order.valid?).must_equal false
+    end
+  end
+
+  describe "total_cost" do
+    it "will calculate the total cost of the orders" do
+      expect(orders(:paid_order).total_cost).must_equal 30000
+      orders(:paid_order).order_items << OrderItem.create( product:products(:product1), order:orders(:paid_order), quantity: 5, price:products(:product1).price )
+      expect(orders(:paid_order).total_cost).must_equal 35000
     end
   end
 
