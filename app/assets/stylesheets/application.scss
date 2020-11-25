@@ -51,19 +51,37 @@ nav li {
 nav li .link {
   float: right;
   padding-right: 50px;
-  color: #86cfda;
-
+  color: teal;
 }
 
 .header {
   padding-top: 50px;
-  background-color: black;
+  //background-color: black;
+  background-image: image-url('/assets/header-pic2.png');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .header h1 {
-  padding: 30px;
+  padding: 60px;
   font-size: 60px;
   text-decoration: none;
+}
+
+.product, .cart, .homepage {
+  text-align: center;
+}
+
+.homepage h1, .homepage h5 {
+  padding: 40px;
+}
+
+.homepage h1 {
+  color: teal;
+}
+
+.homepage h5 {
+  color: #4e555b;
 }
 
 //ul .product {
