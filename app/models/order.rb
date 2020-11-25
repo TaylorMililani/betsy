@@ -8,7 +8,7 @@ class Order < ApplicationRecord
             on: :update
   validates :address, presence: true, on: :update
   validates :cc_num, presence: true, length: { minimum: 12 }, on: :update
-  # validate :valid_card_number?, on: :update
+  # validate :valid_card_number?, on: :update  #The validation works but it'd be making testing a lot more difficult.
   validates :cvv, presence: true, length: { in: 3..4 }, on: :update
   validates :cc_expiration, presence: true, on: :update
   validates :billing_zip, presence: true, on: :update
