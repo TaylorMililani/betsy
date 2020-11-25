@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 table {
-    border: 3px solid black;
+    border: 3px solid #A6A6ED;
     width: 80%;
     text-align: center;
     border-collapse: collapse;
@@ -12,7 +12,7 @@ table {
     margin-bottom: 20px;
 }
 
-td, th {
-    border: 3px solid black;
+thead, td, th {
+    border: 3px solid #A6A6ED;
     padding: 3px 3px 3px 15px;
 }
