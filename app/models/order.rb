@@ -61,7 +61,6 @@ class Order < ApplicationRecord
     end
   end
 
-
   def total_cost
     total = 0
     self.order_items.each do |item|
@@ -69,7 +68,5 @@ class Order < ApplicationRecord
     end
     return total
   end
-
-
 
 end
