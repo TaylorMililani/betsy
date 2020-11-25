@@ -8,7 +8,7 @@ class Order < ApplicationRecord
             on: :update
   validates :address, presence: true, on: :update
   validates :cc_num, presence: true, length: { minimum: 12 }, on: :update
-  # validate :valid_card_number?, on: :update
+  validate :valid_card_number?, on: :update
   validates :cvv, presence: true, length: { in: 3..4 }, on: :update
   validates :cc_expiration, presence: true, on: :update
   validates :billing_zip, presence: true, on: :update
@@ -44,23 +44,16 @@ class Order < ApplicationRecord
         out_of_stock += 1
       end
     end
-
     return out_of_stock
   end
 
   def place_order
     self.update_attribute(:status, "paid" )
     self.order_items.each do |item|
-      if item.product.in_stock >= item.quantity
-        item.product.in_stock -= item.quantity
-      else
-        flash[:error] = "Not enough stock available for purchase. Current stock for : #{item.product.in_stock} "
-        redirect_to products_path
-      end
+      item.product.in_stock -= item.quantity
       item.product.save!
     end
   end
-
 
   def total_cost
     total = 0
@@ -69,7 +62,5 @@ class Order < ApplicationRecord
     end
     return total
   end
-
-
 
 end
