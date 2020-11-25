@@ -10,6 +10,8 @@ Rails.application.routes.draw do
     resources :order_items, only: [:create]
   end
 
+  post "/products/:id/retire", to: "products#retire", as: "retire"
+
   get 'products/:id/reviews/new', to: 'reviews#new'
   post 'products/:id/reviews', to: 'reviews#create'
 
