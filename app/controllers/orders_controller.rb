@@ -1,11 +1,6 @@
 class OrdersController < ApplicationController
   before_action :require_login, only: [:show]
-  before_action :find_order, except: [:index, :new, :create ]
-
-
-  def index
-    @orders = Order.all
-  end
+  before_action :find_order, except: [:new, :create ]
 
   def show
     if @order.nil?
