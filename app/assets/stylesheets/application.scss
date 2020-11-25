@@ -40,10 +40,14 @@
     border-color:#ffeeba
 }
 
+nav {
+  padding-top: 40px;
+}
+
 nav li {
   display: inline;
   text-align: center;
-  padding: 20px;
+  padding : 20px;
   color: #86cfda;
   font-size: large;
 }
@@ -56,16 +60,24 @@ nav li .link {
 
 .header {
   padding-top: 50px;
+  //padding: 50px;
   //background-color: black;
   background-image: image-url('/assets/header-pic2.png');
   background-repeat: no-repeat;
   background-size: cover;
 }
 
-.header h1 {
-  padding: 60px;
+.header h1 strong {
+  padding-left: 40px;
+  padding-top: 60px;
   font-size: 60px;
-  text-decoration: none;
+  font-family: "Poppins", Arial, sans-serif;
+}
+
+.header h1 {
+  padding-top: 60px;
+  font-family: cursive;
+  color: white;
 }
 
 .product, .cart, .homepage {
@@ -83,11 +95,4 @@ nav li .link {
   padding-left: 40px;
 }
 
-//ul .product {
-//  display: inline;
-//}
-
-//body {
-//  text-align: center;
-//}
 
