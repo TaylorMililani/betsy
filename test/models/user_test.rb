@@ -46,7 +46,22 @@ describe User do
     end
 
     describe "relations" do
+      before do
+        @user = users(:user1)
+        @product = products(:product2)
+      end
 
+      it "can set user through 'user'" do
+        @product.user = @user
+
+        expect(@product.user_id).must_equal @user.id
+      end
+
+      it "can set user through user_id" do
+        @product.user_id = @user.id
+
+        expect(@product.user).must_equal @user
+      end
     end
 
   end
