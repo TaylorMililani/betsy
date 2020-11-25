@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :require_login, only: [:show]
-  before_action :find_order, except: [:new, :create ]
+  before_action :find_order, except: [:create ]
 
   def show
     if @order.nil?
@@ -16,10 +16,6 @@ class OrdersController < ApplicationController
     end
   end
 
-  def new
-    @order = Order.new
-  end
-
   def create
 
     @order = Order.new(order_params)
@@ -28,8 +24,8 @@ class OrdersController < ApplicationController
       redirect_to order_path(@order)
       return
     else
-      render :new, status: :bad_request
-      return
+      flash[:error] = "Something happened! Please try again!"
+      redirect_to root_path
     end
   end
 

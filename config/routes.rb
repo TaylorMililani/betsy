@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   resources :order_items, only: [:index, :create, :edit, :update, :destroy]
   get 'order_items/shopping_cart', to: 'order_items#shopping_cart', as: 'shopping_cart'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  resources :orders, only: [:new, :create, :edit, :update, :show,:confirmation]
+  resources :orders, only: [:create, :edit, :update, :show, :confirmation]
 
   patch "/orders/:id/complete_order", to: "orders#complete_order", as: "complete_order"
   patch "/orders/:id/cancel_order", to: "orders#cancel_order", as: "cancel_order"
