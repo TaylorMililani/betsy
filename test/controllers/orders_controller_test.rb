@@ -38,7 +38,7 @@ describe OrdersController do
 
       get edit_order_path(orders(:paid_order))
       expect(flash[:error]).must_equal "We are processing your order. Please call us at 911 if you want to make changes! Thank you!"
-      must_redirect_to order_path(orders(:paid_order))
+      must_redirect_to root_path
     end
 
   end

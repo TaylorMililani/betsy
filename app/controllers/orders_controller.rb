@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :require_login, only: [:show]
-  before_action :find_order, except: [:create ]
+  before_action :find_order, except: [:create]
 
   def show
     if @order.nil?
@@ -35,7 +35,8 @@ class OrdersController < ApplicationController
       return
     elsif @order.status != "pending"
       flash[:error] = "We are processing your order. Please call us at 911 if you want to make changes! Thank you!"
-      redirect_to order_path(@order)
+      redirect_to root_path
+      return
     end
   end
 
@@ -91,7 +92,6 @@ class OrdersController < ApplicationController
 
   def complete_order
     if @order.nil?
-      raise
       flash[:error] = "Something happened! Please try again!"
       redirect_to products_path
     else
