@@ -86,6 +86,12 @@ class ProductsController < ApplicationController
     end
   end
 
+  def hide
+    @product.in_stock = 0
+    redirect_to product_path(@product)
+    return
+  end
+
   private
   def product_params
     params.require(:product).permit(:name, :description, :category, :price, :in_stock, category_ids:[])

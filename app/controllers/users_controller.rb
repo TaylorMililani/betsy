@@ -27,6 +27,7 @@ class UsersController < ApplicationController
             if user.save
                 flash[:success] = "Logged in as new user #{user.username}"
             else
+                head :not_found
                 flash[:error] = "Could not create new user account: #{user.errors.messages}"
                 return redirect_to root_path
             end
@@ -54,7 +55,8 @@ class UsersController < ApplicationController
         @user = User.find_by(id: params[:id])
       
         if @current_user != @user
-          redirect_to root_path, notice: "Sorry, but you are only allowed to view your own profile page."
+            flash[:error] = "Sorry, but you are only allowed to view your own profile page."
+          redirect_to root_path
         end
     end
 
