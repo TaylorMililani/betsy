@@ -67,7 +67,6 @@ describe UsersController do
       expect(flash[:error]).must_equal "Sorry, but you are only allowed to view your own profile page."
     end
   end
-
   
 end
 

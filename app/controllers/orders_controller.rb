@@ -1,24 +1,19 @@
 class OrdersController < ApplicationController
   before_action :require_login, only: [:show]
-  before_action :find_order, except: [:index, :new, :create ]
-
-
-  def index
-    @orders = Order.all
-  end
+  before_action :find_order, except: [:create ]
 
   def show
     if @order.nil?
       flash[:error] = "Invalid Order"
       redirect_back(fallback_location: root_path)
       return
+    else
+      @order_items = @current_user.order_items.where(order_id:@order.id)
+      if @order_items.empty?
+        flash[:error] = "You are not authorized to view this! Sneaky!"
+        redirect_to products_path
+      end
     end
-    @order_items = @current_user.order_items.where(order_id:@order.id)
-
-  end
-
-  def new
-    @order = Order.new
   end
 
   def create
@@ -29,8 +24,8 @@ class OrdersController < ApplicationController
       redirect_to order_path(@order)
       return
     else
-      render :new, status: :bad_request
-      return
+      flash[:error] = "Something happened! Please try again!"
+      redirect_to root_path
     end
   end
 
@@ -70,33 +65,34 @@ class OrdersController < ApplicationController
 
   def confirmation
     if @order.nil?
-      flash.now[:error] = "Something happened! Please try again!"
+      flash[:error] = "Something happened! Please try again!"
       redirect_to products_path
-    end
-    if session[:order_id] == @order.id
-      @order_items = @order.order_items
-      session[:order_id] = nil
     else
-      flash[:error] = "You are not authorized to view this! Sneaky!"
-      redirect_to products_path
+      if session[:order_id] == @order.id
+        @order_items = @order.order_items
+        session[:order_id] = nil
+      else
+        flash[:error] = "You are not authorized to view this! Sneaky!"
+        redirect_to products_path
+      end
     end
-
   end
 
   def cancel_order
     if @order.nil?
-      flash.now[:error] = "Something happened! Please try again!"
+      flash[:error] = "Something happened! Please try again!"
       redirect_to products_path
+    else
+      @order.update_attribute(:status, "cancelled" )
+      flash[:success] = "Successfully cancelled #{@order.id}"
+      redirect_back(fallback_location: manage_orders_path)
     end
-    @order.update_attribute(:status, "cancelled" )
-    flash[:success] = "Successfully cancelled #{@order.id}"
-    redirect_back(fallback_location: manage_orders_path)
   end
 
   def complete_order
     if @order.nil?
       raise
-      flash.now[:error] = "Something happened! Please try again!"
+      flash[:error] = "Something happened! Please try again!"
       redirect_to products_path
     else
       @order.update_attribute(:status, "complete" )

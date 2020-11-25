@@ -1,16 +1,16 @@
 class ProductsController < ApplicationController
 
-  before_action :find_product, only: [:show, :edit, :update, :destroy]
+  before_action :find_product, only: [:show, :edit, :update, :destroy, :retire]
   # before_action :only_see_own_page, only: [:create, :edit, :update, :destroy]
-  before_action :require_ownership, only: [:edit, :update, :destroy]
+  before_action :require_ownership, only: [:edit, :update, :destroy, :retire]
 
 
   def index
-    @products = Product.all
+    @products = Product.products_in_stock
   end
 
   def homepage
-    @products = Product.all
+    @products = Product.products_in_stock
   end
 
   def show
@@ -86,6 +86,16 @@ class ProductsController < ApplicationController
     end
   end
 
+  def retire
+    @product.in_stock = 0
+    if @product.save
+      flash[:success] = "Successfully retired!"
+    else
+      flash[:error] = "Could not be retired"
+    end
+    redirect_to user_path(@current_user.id)
+  end
+
   private
   def product_params
     params.require(:product).permit(:name, :description, :category, :price, :in_stock, category_ids:[])
@@ -114,4 +124,5 @@ class ProductsController < ApplicationController
     end
     return "/uploads/#{uploaded_file.original_filename}"
   end
+
 end
