@@ -11,7 +11,7 @@ class OrderItemsController < ApplicationController
     product = Product.find_by(id: params[:product_id])
 
     if product.in_stock == 0
-      flash.now[:error] = "I'm sorry, that product is out of stock!"
+      flash[:error] = "I'm sorry, that product is out of stock!"
       redirect_to products_path
       return
     end
@@ -22,7 +22,7 @@ class OrderItemsController < ApplicationController
       @new_order = Order.create
       session[:order_id] = @new_order.id
     else
-      flash.now[:error] = "hmm..something went wrong"
+      flash[:error] = "hmm..something went wrong"
       redirect_to products_path
     end
 
@@ -33,7 +33,7 @@ class OrderItemsController < ApplicationController
   def update
     @order_item = OrderItem.find_by(id: params[:id])
     if @order_item.nil?
-      flash.now[:error] = "hmm, we couldn't find a product in your cart with that id"
+      flash[:error] = "hmm, we couldn't find a product in your cart with that id"
     else
       @order_item.update(quantity: params[:quantity])
     end
@@ -48,7 +48,7 @@ class OrderItemsController < ApplicationController
       return
     end
     if @order_item.nil?
-      flash.now[:error] = "hmm, we couldn't find a product in your cart with that id"
+      flash[:error] = "hmm, we couldn't find a product in your cart with that id"
       redirect_to shopping_cart_path
       return
     else
