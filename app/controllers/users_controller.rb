@@ -21,6 +21,7 @@ class UsersController < ApplicationController
             if user.save
                 flash[:success] = "Logged in as new user #{user.username}"
             else
+                head :not_found
                 flash[:error] = "Could not create new user account: #{user.errors.messages}"
                 return redirect_to root_path
             end

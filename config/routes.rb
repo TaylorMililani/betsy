@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
   get 'products/:id/reviews/new', to: 'reviews#new'
   post 'products/:id/reviews', to: 'reviews#create'
+  patch "products/:id/hide", to: "products#hide", as: "hide_product"
 
   resources :order_items, only: [:index, :create, :edit, :update, :destroy]
   get 'order_items/shopping_cart', to: 'order_items#shopping_cart', as: 'shopping_cart'
@@ -35,4 +36,5 @@ Rails.application.routes.draw do
   get "/auth/github", as: "github_login"
   get "/auth/:provider/callback", to: "users#create", as: "auth_github_callback"
   delete "/logout", to: "users#destroy", as: "logout"
+
 end
