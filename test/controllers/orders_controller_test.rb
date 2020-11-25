@@ -1,13 +1,6 @@
 require "test_helper"
 
 describe OrdersController do
-  describe "index" do
-    it "can get index page" do
-      get orders_path
-
-      must_respond_with :ok
-    end
-  end
 
   describe "create " do
 
@@ -105,8 +98,10 @@ describe OrdersController do
 
   describe 'confirmation' do
 
-    it 'can get a confirmation page' do
-      get order_confirmation_path(orders(:paid_order))
+    it 'can get a confirmation page after checkout' do
+      order = orders(:order1)
+      patch order_path(order)
+      get order_confirmation_path(orders(:order1))
       must_respond_with :ok
     end
 

@@ -8,7 +8,6 @@ order1:
   billing_zip: 12345
   status: pending
 
-
 paid_order:
   name: name2
   email: aaa@aa.com
