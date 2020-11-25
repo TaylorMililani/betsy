@@ -70,33 +70,34 @@ class OrdersController < ApplicationController
 
   def confirmation
     if @order.nil?
-      flash.now[:error] = "Something happened! Please try again!"
+      flash[:error] = "Something happened! Please try again!"
       redirect_to products_path
-    end
-    if session[:order_id] == @order.id
-      @order_items = @order.order_items
-      session[:order_id] = nil
     else
-      flash[:error] = "You are not authorized to view this! Sneaky!"
-      redirect_to products_path
+      if session[:order_id] == @order.id
+        @order_items = @order.order_items
+        session[:order_id] = nil
+      else
+        flash[:error] = "You are not authorized to view this! Sneaky!"
+        redirect_to products_path
+      end
     end
-
   end
 
   def cancel_order
     if @order.nil?
-      flash.now[:error] = "Something happened! Please try again!"
+      flash[:error] = "Something happened! Please try again!"
       redirect_to products_path
+    else
+      @order.update_attribute(:status, "cancelled" )
+      flash[:success] = "Successfully cancelled #{@order.id}"
+      redirect_back(fallback_location: manage_orders_path)
     end
-    @order.update_attribute(:status, "cancelled" )
-    flash[:success] = "Successfully cancelled #{@order.id}"
-    redirect_back(fallback_location: manage_orders_path)
   end
 
   def complete_order
     if @order.nil?
       raise
-      flash.now[:error] = "Something happened! Please try again!"
+      flash[:error] = "Something happened! Please try again!"
       redirect_to products_path
     else
       @order.update_attribute(:status, "complete" )
