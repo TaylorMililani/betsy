@@ -1,4 +1,4 @@
-
+<main class="product">
   <h2><%= @product.name %></h2>
   <img src="<%=@product.photo%>" alt="product photo" style="max-width:200px; max-height: 200px">
   <p><%= @product.description %></p>
@@ -29,7 +29,7 @@
 
   <section>
     <h3>Reviews</h3>
-    <ul>
+    <ul class="reviews">
       <% @product.reviews.each do |review| %>
         <li>
           <p>Title: <%= review.title %></p>
@@ -39,4 +39,4 @@
       <% end %>
     </ul>
   </section>
-
+</main>

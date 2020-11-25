@@ -1,25 +1,26 @@
-<h1>Your Shopping Cart</h1>
+<main class="cart">
+  <h1>Your Shopping Cart</h1>
 
-<% if @order_items.nil? %>
-  <h3>No items in your shopping cart right now):</h3>
-<% else %>
-  <ul>
-    <% @order_items.each do |orderitem| %>
-      <li>
-        <p><%= orderitem.name %></p>
-        <p>$<%= orderitem.price %>0</p>
-        <p>Quantity: <%= orderitem.quantity %></p>
-        <%# link_to "Edit", edit_order_item_path %>
-        <%= form_with(url: order_item_path(orderitem.id), method: :patch) do %>
-          <%= number_field_tag(:quantity, orderitem.quantity, in: 0..orderitem.product.in_stock, step: 1) %>
-          <%= submit_tag("Update Quantity", class: "btn btn-primary") %>
-        <% end %>
-        <%= link_to "Remove", order_item_path(orderitem.id), method: :delete %>
-      </li>
-    <% end %>
-  </ul>
-  <%= link_to "Checkout", edit_order_path(@order.id), class: "btn btn-primary" %>
-<!--  <h3>Total: $<%#= @order_items.cart_total %></h3>-->
-<% end %>
-
+  <% if @order_items.nil? %>
+    <h3>No items in your shopping cart right now):</h3>
+  <% else %>
+    <ul>
+      <% @order_items.each do |orderitem| %>
+        <li>
+          <p><%= orderitem.name %></p>
+          <p>$<%= orderitem.price %>0</p>
+          <p>Quantity: <%= orderitem.quantity %></p>
+          <%# link_to "Edit", edit_order_item_path %>
+          <%= form_with(url: order_item_path(orderitem.id), method: :patch) do %>
+            <%= number_field_tag(:quantity, orderitem.quantity, in: 0..orderitem.product.in_stock, step: 1) %>
+            <%= submit_tag("Update Quantity", class: "btn btn-primary") %>
+          <% end %>
+          <%= link_to "Remove", order_item_path(orderitem.id), method: :delete %>
+        </li>
+      <% end %>
+    </ul>
+    <%= link_to "Checkout", edit_order_path(@order.id), class: "btn btn-primary" %>
+  <!--  <h3>Total: $<%#= @order_items.cart_total %></h3>-->
+  <% end %>
+</main>
 

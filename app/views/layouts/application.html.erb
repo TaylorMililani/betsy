@@ -14,7 +14,7 @@
   <body>
   <aside class="header">
     <h1>
-      <%= link_to "SoulStore", root_path %>
+      <strong><%= link_to "SoulStore", root_path %> | </strong> we're not as creepy as we seem
     </h1>
 
     <nav>
@@ -23,8 +23,6 @@
         <li>
           <% if session[:user_id] != nil %>
             <%= link_to "Merchant Dashboard", user_path(session[:user_id]) %>
-          <% else %>
-            Please login to see your Dashboard
           <% end %>
         </li>
         <li><%= link_to "Categories", categories_path %></li>

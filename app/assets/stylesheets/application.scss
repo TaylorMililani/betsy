@@ -40,10 +40,14 @@
     border-color:#ffeeba
 }
 
+nav {
+  padding-top: 40px;
+}
+
 nav li {
   display: inline;
   text-align: center;
-  padding: 20px;
+  padding : 20px;
   color: #86cfda;
   font-size: large;
 }
@@ -51,26 +55,44 @@ nav li {
 nav li .link {
   float: right;
   padding-right: 50px;
-  color: #86cfda;
-
+  color: teal;
 }
 
 .header {
   padding-top: 50px;
-  background-color: black;
+  //padding: 50px;
+  //background-color: black;
+  background-image: image-url('/assets/header-pic2.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.header h1 strong {
+  padding-left: 40px;
+  padding-top: 60px;
+  font-size: 60px;
+  font-family: "Poppins", Arial, sans-serif;
 }
 
 .header h1 {
-  padding: 30px;
-  font-size: 60px;
-  text-decoration: none;
+  padding-top: 60px;
+  font-family: cursive;
+  color: white;
 }
 
-//ul .product {
-//  display: inline;
-//}
+.product, .cart, .homepage {
+  text-align: center;
+}
 
-//body {
-//  text-align: center;
-//}
+.homepage h1 {
+  color: teal;
+  padding: 40px;
+}
+
+.homepage h5 {
+  color: #4e555b;
+  padding-right: 40px;
+  padding-left: 40px;
+}
+
 
