@@ -1,7 +1,11 @@
-<p> Browse by Categories:
-<ul>
-  <% @categories.each do |category| %>
+<h1 class="font-weight-light text-center text-lg-left mt-4 mb-0">Browse by Categories:</h1>
+
+<div class="row text-center text-lg-left">
+  <div class="col-lg-3 col-md-4 col-6">
+    <ul>
+      <% @categories.each do |category| %>
     <li><%= link_to category.name, category_path(category) %></li>
-  <% end %>
-</ul>
-</p>
+      <% end %>
+    </ul>
+  </div>
+</div>
