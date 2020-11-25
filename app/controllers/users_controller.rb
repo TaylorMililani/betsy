@@ -7,13 +7,7 @@ class UsersController < ApplicationController
         @user_products = Product.where(user_id: params[:id])
     end
 
-    def show_user
-        @user = User.find_by(id: params[:id])
-
-        if @user.nil?
-            head :not_found
-            return
-        end
+    def show
     end
 
     def create
@@ -52,9 +46,10 @@ class UsersController < ApplicationController
 
     def only_see_own_page
         @user = User.find_by(id: params[:id])
-      
-        if @current_user != @user
-          redirect_to root_path, notice: "Sorry, but you are only allowed to view your own profile page."
+
+        if @user.nil? || @current_user != @user
+            flash[:error] = "Sorry, but you are only allowed to view your own profile page."
+            redirect_to root_path
         end
     end
 
