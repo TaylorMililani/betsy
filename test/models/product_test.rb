@@ -67,4 +67,50 @@ describe Product do
         expect(product_2.errors.messages[:price]).must_equal ["is not a number"]
       end
   end
+
+  describe 'relations' do
+    before do
+      @user = User.create(email: "michaelj@michael.com", uid: 12345, provider: "github", username: "Michael")
+      @product = Product.create(name: "Michael Jordan", description: "Famous basketball player", price: 2000, in_stock: 20, photo: "url", user_id: @user.id)
+    end
+
+    it 'belongs to a user' do
+      expect(@product.user).must_equal @user
+    end
+
+    it 'has a order_item' do
+      expect(@product).must_respond_to :order_items
+    end
+
+    it 'has many categories' do
+      expect(@product).must_respond_to :categories
+    end
+
+    it 'belongs to categories' do
+      expect(@product).must_respond_to :categories
+    end
+
+    it 'has many reviews' do
+      expect(@product).must_respond_to :reviews
+    end
+  end
+
+  describe "products in stock" do
+    before do
+      @user = User.create(email: "michaelj@michael.com", uid: 12345, provider: "github", username: "Michael")
+      @product_1 = Product.create(name: "Michael Jordan", description: "Famous basketball player", price: 2000, in_stock:0, photo: "url", user_id: @user.id)
+      @product_2 = Product.create(name: "Joy", description: "Noone", price: 2000, in_stock: 5, photo: "url", user_id: @user.id)
+    end
+    it "returns products where in stock greater than 0" do
+
+      expect(Product.products_in_stock).must_include @product_2
+      expect(Product.products_in_stock.include? @product_1).must_equal false
+    end
+  end
 end
+
+# has_and_belongs_to_many :categories
+#   belongs_to :user
+#   has_many :reviews
+#   has_many :order_items
+#   products_in_stock
