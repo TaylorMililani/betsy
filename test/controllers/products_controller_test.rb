@@ -120,4 +120,68 @@ describe ProductsController do
         expect(product.name).wont_be_nil
     end
   end
+
+  describe "destroy" do
+    let (:user2) {
+      users(:user2)
+    }
+
+    let (:new_product_hash) {
+      {
+          product: {
+              name: "Sting",
+              description: "singer",
+              price: 123,
+              in_stock: 5,
+              user_id: user2.id
+          }
+      }
+    }
+    it "will destroy a product that doesn't belong to the order_item" do
+
+      #arrange
+      perform_login(user2)
+      product = products(:product2)
+      # act + assert
+
+      expect {
+        delete product_path(product.id)
+      }.must_change "Product.count", -1
+
+      product.destroy
+      must_respond_with :redirect
+      must_redirect_to user_path(user2.id)
+
+    end
+  end
+
+  describe "retire" do
+    let (:user2) {
+      users(:user2)
+    }
+
+    let (:new_product_hash) {
+      {
+          product: {
+              name: "Sting",
+              description: "singer",
+              price: 123,
+              in_stock: 5,
+              user_id: user2.id
+          }
+      }
+    }
+    it "set product in stock for the order to 0" do
+      perform_login(user2)
+      product = products(:product2)
+      post retire_path(product.id)
+      expect(product.reload.in_stock).must_equal 0
+
+      must_redirect_to user_path(user2.id)
+    end
+
+    it "won't change the product in stock if its in order" do
+    end
+  end
+
 end
